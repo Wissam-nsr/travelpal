@@ -8,5 +8,5 @@ class Moment < ApplicationRecord
 
   validates :location, presence: true
   validates :date, presence: true
-  validates :photo, presence: true
+  validates :photo, attached: true
 end

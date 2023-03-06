@@ -6,5 +6,5 @@ class Trip < ApplicationRecord
   has_many :moments, dependent: :destroy
 
   validates :name, length: { minimum: 5 }
-  validates :photo, presence: true
+  validates :photo, attached: true
 end
