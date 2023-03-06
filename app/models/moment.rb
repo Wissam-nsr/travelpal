@@ -5,4 +5,8 @@ class Moment < ApplicationRecord
   has_one_attached :photo
 
   belongs_to :trip
+
+  validates :location, presence: true
+  validates :date, presence: true
+  validates :photo, presence: true
 end

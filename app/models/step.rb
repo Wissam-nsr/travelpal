@@ -3,4 +3,7 @@ class Step < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   belongs_to :trip
+
+  validates :location, presence: true
+  validates :date, presence: true
 end

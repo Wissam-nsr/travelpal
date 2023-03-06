@@ -9,5 +9,6 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  has_many :trips
+  has_many :trips, dependent: :destroy
+  validates :username, uniqueness: true, length: { minimum: 5, maximum: 20 }
 end
