@@ -1,0 +1,83 @@
+
+db/migrate/20230306151213_create_trips.rb,89
+class CreateTrips < ActiveRecord::Migration[7.0]CreateTrips1,0
+  def changechange2,0
+
+db/migrate/20230306144316_create_active_storage_tables.active_storage.rb,190
+class CreateActiveStorageTables < ActiveRecord::Migration[5.2]CreateActiveStorageTables2,0
+  def changechange3,0
+    def primary_and_foreign_key_typesprimary_and_foreign_key_types50,0
+
+db/migrate/20230306135356_devise_create_users.rb,101
+class DeviseCreateUsers < ActiveRecord::Migration[7.0]DeviseCreateUsers3,0
+  def changechange4,0
+
+db/migrate/20230306150503_add_columns_to_users.rb,101
+class AddColumnsToUsers < ActiveRecord::Migration[7.0]AddColumnsToUsers1,0
+  def changechange2,0
+
+config/application.rb,158
+module TravelpalTravelpal9,0
+  class Application < Rails::ApplicationApplication10,0
+  class Application < Rails::ApplicationTravelpal::Application10,0
+
+app/channels/application_cable/channel.rb,177
+module ApplicationCableApplicationCable1,0
+  class Channel < ActionCable::Channel::BaseChannel2,0
+  class Channel < ActionCable::Channel::BaseApplicationCable::Channel2,0
+
+app/channels/application_cable/connection.rb,195
+module ApplicationCableApplicationCable1,0
+  class Connection < ActionCable::Connection::BaseConnection2,0
+  class Connection < ActionCable::Connection::BaseApplicationCable::Connection2,0
+
+app/jobs/application_job.rb,58
+class ApplicationJob < ActiveJob::BaseApplicationJob1,0
+
+app/helpers/application_helper.rb,47
+module ApplicationHelperApplicationHelper1,0
+
+app/controllers/application_controller.rb,79
+class ApplicationController < ActionController::BaseApplicationController1,0
+
+app/controllers/pages_controller.rb,86
+class PagesController < ApplicationControllerPagesController1,0
+  def homehome4,0
+
+app/models/user.rb,160
+class User < ApplicationRecordUser1,0
+  has_many :tripstrips8,0
+  has_many :tripstrips=8,0
+  has_many :tripstrip_ids8,0
+  has_many :tripstrip_ids=8,0
+
+app/models/trip.rb,202
+class Trip < ApplicationRecordTrip1,0
+  belongs_to :useruser2,0
+  belongs_to :useruser=2,0
+  belongs_to :userbuild_user2,0
+  belongs_to :usercreate_user2,0
+  belongs_to :usercreate_user!2,0
+
+app/models/application_record.rb,67
+class ApplicationRecord < ActiveRecord::BaseApplicationRecord1,0
+
+app/mailers/application_mailer.rb,67
+class ApplicationMailer < ActionMailer::BaseApplicationMailer1,0
+
+test/channels/application_cable/connection_test.rb,206
+class ApplicationCable::ConnectionTest < ActionCable::Connection::TestCaseConnectionTest3,0
+class ApplicationCable::ConnectionTest < ActionCable::Connection::TestCaseApplicationCable::ConnectionTest3,0
+
+test/application_system_test_case.rb,95
+class ApplicationSystemTestCase < ActionDispatch::SystemTestCaseApplicationSystemTestCase3,0
+
+test/test_helper.rb,101
+class ActiveSupport::TestCaseTestCase5,0
+class ActiveSupport::TestCaseActiveSupport::TestCase5,0
+
+test/models/trip_test.rb,54
+class TripTest < ActiveSupport::TestCaseTripTest3,0
+
+test/models/user_test.rb,54
+class UserTest < ActiveSupport::TestCaseUserTest3,0
