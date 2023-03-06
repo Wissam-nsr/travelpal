@@ -11,4 +11,8 @@ class User < ApplicationRecord
 
   has_many :trips, dependent: :destroy
   validates :username, uniqueness: true, length: { minimum: 5, maximum: 20 }
+
+  has_many :chatrooms, dependent: :destroy
+  has_many :messages, through: :chatroom, dependent: :destroy
+
 end
