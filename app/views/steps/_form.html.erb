@@ -1,0 +1,7 @@
+<%= simple_form_for [@trip, @step], method: :post, url: trip_steps_path do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :location %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit %>
+<% end %>
