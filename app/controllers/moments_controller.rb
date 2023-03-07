@@ -1,5 +1,4 @@
 class MomentsController < ApplicationController
-
   def new
     @moment = Moment.new
   end
