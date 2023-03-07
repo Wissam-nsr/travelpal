@@ -1,5 +1,17 @@
 require "open-uri"
 
+def random_spot(origin_coordinates, km_distance)
+  lat_0 = origin_coordinates[0]
+  lng_0 = origin_coordinates[1]
+
+  offset = km_distance * 0.01
+
+  new_lng = rand(lng_0 - offset.. lng_0 + offset ).round(6)
+  new_lat = rand(lat_0 - offset.. lat_0 + offset ).round(6)
+
+  random_coordinate = [new_lat, new_lng]
+end
+
 # RESET DATA_BASE
 Moment.destroy_all
 Step.destroy_all
@@ -60,14 +72,13 @@ BIOS = ["Wonder less, Wander more.",
   ]
 
  10.times do
-    faker = Faker::Internet.user('username', 'email')
     user = User.new
-    user.email = faker['email']
+    user.email = Faker::Internet.email
     user.password = "123456"
-    user.username = faker['username']
+    user.username = Faker::Internet.username(specifier: 5...20)
     user.description = BIOS.sample
     user.avatar.attach(io: URI.open(AVATARS_URL.sample), filename: "nes.png", content_type: "image/png")
-    user.save
+    user.save!
  end
 
 travelers = User.all.drop(1)
@@ -94,7 +105,7 @@ travelers.each do |traveler|
   traveler.update
 end
 
-puts "Done ! (User.all = #{User.all})"
+puts "Done ! (User.all = #{User.count})"
 puts "Demo user: stephan@demo.com, pwd: 123456"
 
 # TRIPS
@@ -130,7 +141,7 @@ DESCRIPTIONS = ["One of the country's most famous road trips stretches along its
   trip.description = DESCRIPTIONS.sample
   trip.photo.attach(io: URI.open(TRIP_PHOTOS.sample), filename: "nes.png", content_type: "image/png")
   trip.user = User.all.sample
-  trip.save
+  trip.save!
 end
 
 Trip.all.first(5).each do |trip|
@@ -138,7 +149,7 @@ Trip.all.first(5).each do |trip|
   trip.update
 end
 
-puts "Done ! (Trip.all= #{Trip.all})"
+puts "Done ! (Trip.all= #{Trip.count})"
 
 # STEPS
 puts "Creating between 3 and 6 Steps per trips"
@@ -210,11 +221,11 @@ Trip.all.each do |trip|
     step_list.delete(step.location)
     step.description = Faker::Lorem.sentence
     step.date = Faker::Date.between(from: 60.days.ago, to: Date.today)
-    step.save
+    step.save!
   end
 end
 
-puts "Done ! (Step.all= #{Step.all})"
+puts "Done ! (Step.all= #{Step.count})"
 
 # MOMENTS
 puts "Creating between 2 and 5 Moments per Steps"
@@ -229,22 +240,10 @@ Step.all.each do |step|
     moment.longitude = location[1]
     moment.photo.attach(io: URI.open("https://source.unsplash.com/random/?australian-landscape"), filename: "nes.png", content_type: "image/png")
     moment.date = step.date = Faker::Date.between(from: step.date - 2, to: step.date + 2)
-    moment.save
+    moment.save!
   end
 end
 
-puts "Done ! (Moment.all= #{Trip.all})"
+puts "Done ! (Moment.all= #{Moment.count})"
 
 puts "------ SEED DONE 🚀 ------"
-
-def random_spot(origin_coordinates, km_distance)
-  lat_0 = origin_coordinates[0]
-  lng_0 = origin_coordinates[1]
-
-  offset = km_distance * 0.01
-
-  new_lng = rand(lng_0 - offset.. lng + offset ).round(6)
-  new_lat = rand(lat_0 - offset.. lat + offset ).round(6)
-
-  random_coordinate = [new_lat, new_lng]
-end
