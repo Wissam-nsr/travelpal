@@ -1,3 +1,11 @@
+require "open-uri"
+
+# RESET DATA_BASE
+Moment.destroy_all
+Step.destroy_all
+Trip.destroy_all
+User.destroy_all
+
 # USERS
 puts "Creating a demo user and 10 random Users"
 
@@ -14,28 +22,28 @@ demo_user.save
 # 10 other users:
 BIOS = ["Wonder less, Wander more.",
   "Strong believer in the fact that traveling enriches your soul and opens your mind.",
-  "I haven't been everywhere, but it's definitely on my list."
-  "One life. One world. Explore it as much as you can."
-  "Suffering from Wanderlust."
-  "I have Wanderlust: a strong desire to travel."
-  "Travel is my therapy."
-  "Travel! Money returns with time, but time doesn't."
-  "It's not necessary that those who wander are lost."
-  "Leave only footprints and take away only memories."
-  "Life is too short to be lived in one place."
-  "Keep calm and travel on."
-  "I've got 99 problems. But I am on vacation and I am ignoring them all!"
-  "If traveling was free, BYE!"
-  "In need of vitamin SEA."
-  "I'm in love with places I've never been to."
-  "Buy the ticket, take the ride."
-  "Making memories all over the world."
-  "I need a vacation for so long, I forget all my passwords!"
-  "It's bad manners to let vacation wait!"
-  "A change of latitude helps my attitude."
-  "I've got a bad case of wanderlust."
-  "Finding paradise wherever I go."
-  "I have an insane calling to be where I'm not."
+  "I haven't been everywhere, but it's definitely on my list.",
+  "One life. One world. Explore it as much as you can.",
+  "Suffering from Wanderlust.",
+  "I have Wanderlust: a strong desire to travel.",
+  "Travel is my therapy.",
+  "Travel! Money returns with time, but time doesn't.",
+  "It's not necessary that those who wander are lost.",
+  "Leave only footprints and take away only memories.",
+  "Life is too short to be lived in one place.",
+  "Keep calm and travel on.",
+  "I've got 99 problems. But I am on vacation and I am ignoring them all!",
+  "If traveling was free, BYE!",
+  "In need of vitamin SEA.",
+  "I'm in love with places I've never been to.",
+  "Buy the ticket, take the ride.",
+  "Making memories all over the world.",
+  "I need a vacation for so long, I forget all my passwords!",
+  "It's bad manners to let vacation wait!",
+  "A change of latitude helps my attitude.",
+  "I've got a bad case of wanderlust.",
+  "Finding paradise wherever I go.",
+  "I have an insane calling to be where I'm not.",
   "Happiness is planning a trip to somewhere new."]
 
   AVATARS_URL = [
@@ -58,7 +66,7 @@ BIOS = ["Wonder less, Wander more.",
     user.password = "123456"
     user.username = faker['username']
     user.description = BIOS.sample
-    user.avatar.attach(io: URI.open(AVATAR_URL.sample), filename: "nes.png", content_type: "image/png")
+    user.avatar.attach(io: URI.open(AVATARS_URL.sample), filename: "nes.png", content_type: "image/png")
     user.save
  end
 
@@ -111,7 +119,7 @@ TRIP_PHOTOS = ["https://images.unsplash.com/photo-1519709063170-124e1d4a8e24?ixl
 ]
 
 DESCRIPTIONS = ["One of the country's most famous road trips stretches along its southern coast from Torquay to Allansford in Victoria.",
-"It's a wind-the-windows-down kind of road trip that embraces Australia's coastal beauty and laid-back vibes. Plus, it passes what many would argue is the country's most iconic road trip pit stop: the Big Banana in Coffs Harbour."
+"It's a wind-the-windows-down kind of road trip that embraces Australia's coastal beauty and laid-back vibes. Plus, it passes what many would argue is the country's most iconic road trip pit stop: the Big Banana in Coffs Harbour.",
 "Just under 1200 kilometres, this west coast drive takes you from Perth to Exmouth along WA's stunning Coral Coast via Cervantes, Geraldton, Monkey Mia and Carnarvon.",
 "Take in the Top End with this one-day trip that runs through Litchfield National Park. From the city you'll head bush, tracing your way through Katherine and Kakadu before you meet Litchfield; a strip overflowing with waterfalls (excuse the pun), swimming holes, and incredible rock formations.",
 "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."]
