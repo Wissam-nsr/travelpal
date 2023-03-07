@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
   get "uikit", to: "pages#uikit"
-  get "users/:id", to: "users#show"
 
   resources :users, only: [:show]
 
