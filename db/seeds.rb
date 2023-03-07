@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 require "open-uri"
 
 # RESET DATA_BASE
@@ -249,10 +248,3 @@ def random_spot(origin_coordinates, km_distance)
 
   random_coordinate = [new_lat, new_lng]
 end
-=======
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-User.destroy_all
-User.create!(username: "wissou", email:"bob@mail.com", password: "123456")
->>>>>>> master
