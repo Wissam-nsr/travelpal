@@ -4,7 +4,7 @@ class MomentsController < ApplicationController
   end
 
   def create
-    @moment = Moment.new(params[:moment])
+    @moment = Moment.new(moment_params)
     @moment.save
   end
 
