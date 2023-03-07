@@ -1,3 +1,18 @@
 <h2><%= @user.username %></h2>
-<p><%= @user.email %></p>
+<p><%= @user.avatar %></p>
+<p><%= @user.description %></p>
 <p><%= @user.location %></p>
+
+<%= @user.trips.each do |trip|%>
+  <p><%= trip.photo %></p>
+  <p><%= trip.name %></p>
+<% end %>
+
+<button type="button">End the trip</button>
+<%= link_to "End the trip", trip_path %>
+
+<%= @user.moments.each do |moment| %>
+  <p><%= moment.location %></p>
+  <p><%= moment.date %></p>
+  <p><%= moment.photo %></p>
+<% end %>
