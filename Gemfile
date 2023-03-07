@@ -79,4 +79,3 @@ end
 
 gem "cloudinary"
 gem "geocoder"
-gem 'active_storage_validations', '~> 0.9.3'
