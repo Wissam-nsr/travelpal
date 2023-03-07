@@ -54,7 +54,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+<<<<<<< HEAD
     active_storage_validations (1.0.3)
+=======
+    active_storage_validations (0.9.8)
+>>>>>>> master
       activejob (>= 5.2.0)
       activemodel (>= 5.2.0)
       activestorage (>= 5.2.0)
@@ -288,7 +292,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+<<<<<<< HEAD
   active_storage_validations
+=======
+  active_storage_validations (~> 0.9.3)
+>>>>>>> master
   autoprefixer-rails
   bootsnap
   capybara
