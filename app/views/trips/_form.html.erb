@@ -1,4 +1,4 @@
-<%= simple_form_for @trip, method: :post, url: trips_path do |f| %>
+<%= simple_form_for trip do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :photo, as: :file %>

@@ -1,5 +1,4 @@
 class MomentsController < ApplicationController
-  before_action :set_moment, only: [:edit, :update, :destroy]
 
   def new
     @moment = Moment.new
@@ -16,17 +15,6 @@ class MomentsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @moment.update(moment_params)
-      redirect_to user_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
   def destroy
     @moment.destroy
   end
@@ -34,11 +22,7 @@ class MomentsController < ApplicationController
 private
 
   def moment_params
-    params.require(:moment).require(:description, :date, :location)
-  end
-
-  def set_moment
-    @moment = Moment.find(params[:moment_id])
+    params.require(:moment).permit(:description, :date, :location, :photo)
   end
 
 end

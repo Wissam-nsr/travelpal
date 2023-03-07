@@ -8,7 +8,6 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
-    # @trip.photo.attach("images/trip_default.jpg") unless @trip.photo.attached?
     if @trip.save
       redirect_to user_path
     else
@@ -31,7 +30,7 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).require(:name, :description, :photo)
+    params.require(:trip).permit(:name, :description, :photo)
   end
 
   def set_trip

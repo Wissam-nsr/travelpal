@@ -40,7 +40,7 @@ before_action :set_step, only: [:edit, :update, :destroy]
   private
 
   def step_params
-    params.require(:step).require(:name, :description, :date, :location)
+    params.require(:step).permit(:name, :description, :date, :location)
   end
 
   def set_step
