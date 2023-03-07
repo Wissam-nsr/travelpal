@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   has_many :trips, dependent: :destroy
+  has_many :steps, through: :trips
+  has_many :moments, through: :trips
+
   validates :username, uniqueness: true, length: { minimum: 5, maximum: 20 }
 
   has_many :chatrooms, dependent: :destroy

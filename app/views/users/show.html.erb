@@ -8,7 +8,6 @@
   <p><%= trip.name %></p>
 <% end %>
 
-<button type="button">End the trip</button>
 <%= link_to "End the trip", trip_path %>
 
 <%= @user.moments.each do |moment| %>
