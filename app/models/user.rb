@@ -14,5 +14,4 @@ class User < ApplicationRecord
 
   has_many :chatrooms, dependent: :destroy
   has_many :messages, through: :chatroom, dependent: :destroy
-
 end
