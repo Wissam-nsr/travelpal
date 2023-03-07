@@ -288,11 +288,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-<<<<<<< HEAD
   active_storage_validations
-=======
-  active_storage_validations (~> 0.9.3)
->>>>>>> master
   autoprefixer-rails
   bootsnap
   capybara
