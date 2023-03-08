@@ -4,19 +4,24 @@ class MomentsController < ApplicationController
   end
 
   def create
+    @trip = Trip.find(params[:trip_id])
     @moment = Moment.new(moment_params)
-    @moment.save
+    @moment.trip = @trip
+    if @moment.save
+      redirect_to user_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    @moment = Moment.find(params[:id])
     @moment.destroy
-    redirect_to moments_path, status: :see_other
   end
-end
 
 private
 
-def moment_params
-  params.require(:moment).permit(:description, :location, :date)
+  def moment_params
+    params.require(:moment).permit(:description, :date, :location, :photo)
+  end
+
 end
