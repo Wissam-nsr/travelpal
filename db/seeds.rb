@@ -86,7 +86,7 @@ travelers = User.all.drop(1)
 travelers.first(4).each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 10)
   traveler.location = Geocoder.search(spot).first.address
-  traveler.update
+  traveler.save!
 end
 
 travelers = travelers.drop(4)
@@ -94,7 +94,7 @@ travelers = travelers.drop(4)
 travelers.first(2).each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 50)
   traveler.location = Geocoder.search(spot).first.address
-  traveler.update
+  traveler.save!
 end
 
 travelers = travelers.drop(2)
@@ -102,10 +102,10 @@ travelers = travelers.drop(2)
 travelers.each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 100)
   traveler.location = Geocoder.search(spot).first.address
-  traveler.update
+  traveler.save!
 end
 
-puts "Done ! (User.all = #{User.count})"
+puts "Done ! (#{User.count} Users)"
 puts "Demo user: stephan@demo.com, pwd: 123456"
 
 # TRIPS
@@ -146,10 +146,10 @@ end
 
 Trip.all.first(5).each do |trip|
   trip.ended = true
-  trip.update
+  trip.save!
 end
 
-puts "Done ! (Trip.all= #{Trip.count})"
+puts "Done ! (#{Trip.count} Trips)"
 
 # STEPS
 puts "Creating between 3 and 6 Steps per trips"
@@ -225,25 +225,26 @@ Trip.all.each do |trip|
   end
 end
 
-puts "Done ! (Step.all= #{Step.count})"
+puts "Done ! (#{Step.count} Steps)"
 
 # MOMENTS
 puts "Creating between 2 and 5 Moments per Steps"
 
 Step.all.each do |step|
   rand(2..5).times do
-    moment = moment.new
+    moment = Moment.new
     moment.trip = step.trip
     moment.description = Faker::Lorem.sentence
-    location = random_coordinate([step.latitude, step.longitude], 20)
+    location = random_spot([step.latitude, step.longitude], 20)
     moment.latitude = location[0]
     moment.longitude = location[1]
+    moment.location = Geocoder.search([moment.latitude, moment.longitude]).first.address
     moment.photo.attach(io: URI.open("https://source.unsplash.com/random/?australian-landscape"), filename: "nes.png", content_type: "image/png")
     moment.date = step.date = Faker::Date.between(from: step.date - 2, to: step.date + 2)
     moment.save!
   end
 end
 
-puts "Done ! (Moment.all= #{Moment.count})"
+puts "Done ! (#{Moment.count} Moments)"
 
 puts "------ SEED DONE 🚀 ------"
