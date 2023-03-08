@@ -32,6 +32,9 @@ demo_user.location = "380 Roma St, Brisbane City QLD 4000, Australie"
 demo_user.avatar.attach(io: URI.open("https://img.freepik.com/photos-gratuite/touriste-masculin-serieux-porte-sac-dos-equipement-necessaire-pour-voyageur-aime-voyager-longues-distances-prefere-vacances-actives-boit-du-cafe_273609-33658.jpg?w=740&t=st=1678187049~exp=1678187649~hmac=42bc387501e174ec55f1ab9bff6db346b7cfb4da9f7ba647a06522d70cf613ba"), filename: "nes.png", content_type: "image/png")
 demo_user.save
 
+p demo_user.latitude
+p demo_user.longitude
+
 # 10 other users:
 BIOS = [
   "Wonder less, Wander more.",
