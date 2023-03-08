@@ -251,7 +251,7 @@ puts "Done ! (#{Step.count} Steps)"
 puts "Creating between 2 and 5 Moments per Steps"
 puts "..."
 
-Step.all.each do |step|
+Step.all.each_with_index do |step, index|
   rand(2..5).times do
     moment = Moment.new
     moment.trip = step.trip
@@ -263,7 +263,7 @@ Step.all.each do |step|
     moment.date = step.date = Faker::Date.between(from: step.date - 2, to: step.date + 2)
     moment.save
   end
-  puts "#{step.index + 1} / #{Step.count} steps"
+  puts "#{index + 1} / #{Step.count} steps"
   puts "..."
 end
 
