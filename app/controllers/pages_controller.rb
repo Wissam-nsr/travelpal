@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :landing ]
 
   def home
-    @users = User.near([current_user.latitude,current_user.longitude],100)
+    @users = User.near([current_user.latitude,current_user.longitude],200)
     @markers = @users.geocoded.map do |user|
       {
         lat: user.latitude,

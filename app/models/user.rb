@@ -15,6 +15,14 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, length: { minimum: 5, maximum: 20 }
 
+  def geocode
+    if location.present?
+      self.geocoder_object = Geocoder.search(location).first.data
+    elsif latitude.present?
+      self.geocoder_object = Geocoder.search([latitude, longitude]).first.data
+    end
+  end
+  
   # has_many :chatrooms #dependent: :destroy
   # has_many :messages, through: :chatroom, dependent: :destroy
 end

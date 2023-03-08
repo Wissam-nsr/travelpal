@@ -1,4 +1,22 @@
 
-<%=
-@current_user.location
- %>
+<h4>PROFILE</h4>
+<p><strong>current_user: </strong><%= @current_user.username %></p>
+<p><strong>current_city: </strong><%= @current_user_city%></p>
+<p><strong># of travellers around: </strong><%= @users.length - 1%></p>
+<p><%= cl_image_tag @current_user.avatar.key %></p>
+
+<h4>RADIUS</h4>
+
+
+<h4>FEED</h4>
+<% @users.each do |user| %>
+  <% unless user.id == @current_user.id %>
+    <p><%= user.username %></p>
+    <p>avatar: <%= cl_image_tag user.avatar.key %></p>
+    <p>current_city: <%= user.geocoder_object["address"]["city"] %></p>
+    <p>distance: <%= Geocoder::Calculations.distance_between([@current_user.geocoder_object["lat"],@current_user.geocoder_object["lon"]], [user.geocoder_object["lat"],user.geocoder_object["lon"]]) %></p> %> %>
+    <p>moments: <% user.trips.last.moments.each do |moment| %>
+      <%= cl_image_tag moment.photo.key %>
+      <% end %></p>
+  <% end %>
+<% end %>
