@@ -1,15 +1,15 @@
 require "open-uri"
 
 def random_spot(origin_coordinates, km_distance)
-  lat_0 = origin_coordinates[0]
-  lng_0 = origin_coordinates[1]
+  origin_latitude = origin_coordinates[0]
+  origin_longitude = origin_coordinates[1]
 
   offset = km_distance * 0.01
 
-  new_lng = rand(lng_0 - offset.. lng_0 + offset ).round(6)
-  new_lat = rand(lat_0 - offset.. lat_0 + offset ).round(6)
+  new_lng = rand(origin_longitude - offset..origin_longitude + offset).round(6)
+  new_lat = rand(origin_latitude - offset..origin_latitude + offset).round(6)
 
-  random_coordinate = [new_lat, new_lng]
+  [new_lat, new_lng]
 end
 
 # RESET DATA_BASE
@@ -20,6 +20,7 @@ User.destroy_all
 
 # USERS
 puts "Creating a demo user and 10 random Users"
+puts "..."
 
 # Demo User:
 demo_user = User.new
@@ -32,7 +33,8 @@ demo_user.avatar.attach(io: URI.open("https://img.freepik.com/photos-gratuite/to
 demo_user.save
 
 # 10 other users:
-BIOS = ["Wonder less, Wander more.",
+BIOS = [
+  "Wonder less, Wander more.",
   "Strong believer in the fact that traveling enriches your soul and opens your mind.",
   "I haven't been everywhere, but it's definitely on my list.",
   "One life. One world. Explore it as much as you can.",
@@ -56,37 +58,38 @@ BIOS = ["Wonder less, Wander more.",
   "I've got a bad case of wanderlust.",
   "Finding paradise wherever I go.",
   "I have an insane calling to be where I'm not.",
-  "Happiness is planning a trip to somewhere new."]
+  "Happiness is planning a trip to somewhere new."
+]
 
-  AVATARS_URL = [
-    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60"
-  ]
+AVATARS_URL = [
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60"
+]
 
- 10.times do
-    user = User.new
-    user.email = Faker::Internet.email
-    user.password = "123456"
-    user.username = Faker::Internet.username(specifier: 5...20)
-    user.description = BIOS.sample
-    user.avatar.attach(io: URI.open(AVATARS_URL.sample), filename: "nes.png", content_type: "image/png")
-    user.save!
- end
+10.times do
+  user = User.new
+  user.email = Faker::Internet.email
+  user.password = "123456"
+  user.username = Faker::Internet.username(specifier: 5...20)
+  user.description = BIOS.sample
+  user.avatar.attach(io: URI.open(AVATARS_URL.sample), filename: "nes.png", content_type: "image/png")
+  user.save
+end
 
 travelers = User.all.drop(1)
 
 travelers.first(4).each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 10)
   traveler.location = Geocoder.search(spot).first.address
-  traveler.save!
+  traveler.save
 end
 
 travelers = travelers.drop(4)
@@ -94,7 +97,7 @@ travelers = travelers.drop(4)
 travelers.first(2).each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 50)
   traveler.location = Geocoder.search(spot).first.address
-  traveler.save!
+  traveler.save
 end
 
 travelers = travelers.drop(2)
@@ -102,7 +105,7 @@ travelers = travelers.drop(2)
 travelers.each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 100)
   traveler.location = Geocoder.search(spot).first.address
-  traveler.save!
+  traveler.save
 end
 
 puts "Done ! (#{User.count} Users)"
@@ -110,30 +113,36 @@ puts "Demo user: stephan@demo.com, pwd: 123456"
 
 # TRIPS
 puts "Creating 15 Trips"
+puts "..."
 
-TRIPS = ["Great Ocean Road",
+TRIPS = [
+  "Great Ocean Road",
   "West Coast",
   "Est Coast",
   "Northen Territories",
-  "Outback"]
-
-TRIP_PHOTOS = ["https://images.unsplash.com/photo-1519709063170-124e1d4a8e24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODd8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1596037560218-72a6812a6574?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODh8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1560424730-ec1c186a7573?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1592930506084-71a406f242a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1446768500601-ac47e5ec3719?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=600",
-"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1553076446-829d6dba2f0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1532339142463-fd0a8979791a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dHJpcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1573097637683-58e6462d2902?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-"https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJpcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  "Outback"
 ]
 
-DESCRIPTIONS = ["One of the country's most famous road trips stretches along its southern coast from Torquay to Allansford in Victoria.",
-"It's a wind-the-windows-down kind of road trip that embraces Australia's coastal beauty and laid-back vibes. Plus, it passes what many would argue is the country's most iconic road trip pit stop: the Big Banana in Coffs Harbour.",
-"Just under 1200 kilometres, this west coast drive takes you from Perth to Exmouth along WA's stunning Coral Coast via Cervantes, Geraldton, Monkey Mia and Carnarvon.",
-"Take in the Top End with this one-day trip that runs through Litchfield National Park. From the city you'll head bush, tracing your way through Katherine and Kakadu before you meet Litchfield; a strip overflowing with waterfalls (excuse the pun), swimming holes, and incredible rock formations.",
-"The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."]
+TRIP_PHOTOS = [
+  "https://images.unsplash.com/photo-1519709063170-124e1d4a8e24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODd8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1596037560218-72a6812a6574?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODh8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1560424730-ec1c186a7573?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1592930506084-71a406f242a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1446768500601-ac47e5ec3719?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=600",
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1553076446-829d6dba2f0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1532339142463-fd0a8979791a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dHJpcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1573097637683-58e6462d2902?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJpcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+]
+
+DESCRIPTIONS = [
+  "One of the country's most famous road trips stretches along its southern coast from Torquay to Allansford in Victoria.",
+  "It's a wind-the-windows-down kind of road trip that embraces Australia's coastal beauty and laid-back vibes. Plus, it passes what many would argue is the country's most iconic road trip pit stop: the Big Banana in Coffs Harbour.",
+  "Just under 1200 kilometres, this west coast drive takes you from Perth to Exmouth along WA's stunning Coral Coast via Cervantes, Geraldton, Monkey Mia and Carnarvon.",
+  "Take in the Top End with this one-day trip that runs through Litchfield National Park. From the city you'll head bush, tracing your way through Katherine and Kakadu before you meet Litchfield; a strip overflowing with waterfalls (excuse the pun), swimming holes, and incredible rock formations.",
+  "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."
+]
 
 15.times do
   trip = Trip.new
@@ -141,20 +150,23 @@ DESCRIPTIONS = ["One of the country's most famous road trips stretches along its
   trip.description = DESCRIPTIONS.sample
   trip.photo.attach(io: URI.open(TRIP_PHOTOS.sample), filename: "nes.png", content_type: "image/png")
   trip.user = User.all.sample
-  trip.save!
+  trip.save
 end
 
 Trip.all.first(5).each do |trip|
   trip.ended = true
-  trip.save!
+  trip.save
 end
 
 puts "Done ! (#{Trip.count} Trips)"
 
 # STEPS
 puts "Creating between 3 and 6 Steps per trips"
+puts "..."
 
-STEPS = {"Great Ocean Road" => ["Adelaide",
+STEPS = {
+  "Great Ocean Road" => [
+    "Adelaide",
     "Barossa Valley",
     "Cape Jervis",
     "Victor Harbor",
@@ -163,43 +175,51 @@ STEPS = {"Great Ocean Road" => ["Adelaide",
     "Port Fairy",
     "Port Campbell National Park",
     "Cape Otway",
-    "Torquay",
+    "Torquay Victoria",
     "Geelong",
-    "Melbourne"],
-  "West Coast" => ["Broome",
+    "Melbourne"
+  ],
+  "West Coast" => [
+    "Broome WA",
     "Port Headland",
     "Karratha",
-    "Exmouth" ,
+    "Exmouth WA" ,
     "Coral Bay",
     "Carnarvon" ,
     "Monkey Mia" ,
     "Kalbarri" ,
     "Geraldton",
     "Jurien Bay",
-    "Perth"],
-  "Est Coast" => ["Cape Tribulation",
+    "Perth"
+  ],
+  "Est Coast" => [
+    "Cape Tribulation QLD",
     "Cairns",
     "Airlie Beach",
-    "Rockhampton",
+    "Rockhampton QLD",
     "Fraser Island",
-    "Noosa", "Brisbane",
+    "Noosa",
+    "Brisbane",
     "Gold Coast",
     "Byron Bay",
-    "Coofs Harbour",
+    "Coffs Harbour",
     "Port Macquarie",
     "Hunter Valley",
-    "Sydney"],
-  "Northen Territories" => ["Darwin",
+    "Sydney"
+  ],
+  "Northen Territories" => [
+    "Darwin",
     "Jabiru",
     "Ubirr",
     "Cooinda",
     "Jim Jim Falls",
-    "Maguk Gorge",
     "Gunlom",
-    "Pine Creek",
+    "Pine Creek NT",
     "Katherine",
-    "Nitmiluk National Park"],
-  "Outback" => ["Darwin",
+    "Nitmiluk National Park"
+  ],
+  "Outback" => [
+    "Darwin",
     "Kakadu National Park",
     "Nitmiluk National Park",
     "Alice Springs",
@@ -208,11 +228,11 @@ STEPS = {"Great Ocean Road" => ["Adelaide",
     "Flinders Ranges",
     "Barossa Valley",
     "Victor Harbor",
-    "Adelaide"]
-}
+    "Adelaide"
+  ] }
 
 Trip.all.each do |trip|
-    step_list = STEPS[trip.name]
+  step_list = STEPS[trip.name].map { |step| step }
   rand(3..6).times do
     step = Step.new
     step.trip = trip
@@ -221,7 +241,7 @@ Trip.all.each do |trip|
     step_list.delete(step.location)
     step.description = Faker::Lorem.sentence
     step.date = Faker::Date.between(from: 60.days.ago, to: Date.today)
-    step.save!
+    step.save
   end
 end
 
@@ -229,6 +249,7 @@ puts "Done ! (#{Step.count} Steps)"
 
 # MOMENTS
 puts "Creating between 2 and 5 Moments per Steps"
+puts "..."
 
 Step.all.each do |step|
   rand(2..5).times do
@@ -238,11 +259,12 @@ Step.all.each do |step|
     location = random_spot([step.latitude, step.longitude], 20)
     moment.latitude = location[0]
     moment.longitude = location[1]
-    moment.location = Geocoder.search([moment.latitude, moment.longitude]).first.address
     moment.photo.attach(io: URI.open("https://source.unsplash.com/random/?australian-landscape"), filename: "nes.png", content_type: "image/png")
     moment.date = step.date = Faker::Date.between(from: step.date - 2, to: step.date + 2)
-    moment.save!
+    moment.save
   end
+  puts "#{step.index + 1} / #{Step.count} steps"
+  puts "..."
 end
 
 puts "Done ! (#{Moment.count} Moments)"
