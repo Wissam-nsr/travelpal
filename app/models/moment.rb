@@ -4,7 +4,7 @@ class Moment < ApplicationRecord
   belongs_to :trip
 
   validates :latitude, presence: true
-  validates :ongitude, presence: true
+  validates :longitude, presence: true
   validates :date, presence: true
   validates :photo, attached: true
 end
