@@ -1,0 +1,110 @@
+<div class = "User card">
+<div class="uk-card uk-card-default uk-width-1-2@m">
+    <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+                <img class="uk-border-circle" width="40" height="40" src="images/avatar.jpg" alt="Avatar">
+            </div>
+            <div class="uk-width-expand">
+                <h3 class="uk-card-title uk-margin-remove-bottom">Title</h3>
+                <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-card-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+    </div>
+    <div class="uk-card-footer">
+        <a href="#" class="uk-button uk-button-text">Read more</a>
+    </div>
+</div>
+</div>
+
+<div style="height: 100vh; width: 100%; margin-top: 500px">
+  <h1 style="font-size: 3rem">lets style</h1>
+  <h4>flex box grid</h4>
+  <div class="flex-container">
+    <% 10.times do  %>
+      <div class="third-card" data-controller="toggle-element">
+        <div class="trigger" data-action="click->toggle-element#toggle">Click me!</div>
+        <div class="hidden" data-toggle-element-target="element">
+          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.
+          Cras ultricies ligula sed magna dictum porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+          Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Proin eget tortor risus. Curabitur aliquet quam id dui posuere blandit.
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <h4>CSS grid</h4>
+  <div class="grid-container">
+    <% 10.times do  %>
+      <div class="css-third-card">
+
+      </div>
+    <% end %>
+  </div>
+</div>
+<style>
+  .trigger.active {
+    color: blue;
+    font-size: 2rem;
+  }
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .third-card {
+    width: 33%;
+    background: pink;
+  }
+  .css-third-card {
+    width: 100%;
+    height: 10rem;
+    background: orange;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+  }
+  /* general rules */
+  html {
+    font-size: 62.5%;
+    // 1rem = 10px
+  }
+  // large screens
+  @media screen and (min-width: 1400px) {
+    html {
+      font-size: 66%;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    html {
+      font-size: 60%;
+    }
+  }
+  // tablets
+  @media screen and (max-width: 992px) {
+    html {
+      font-size: 57%;
+      // font-size: 53.56%;
+    }
+  }
+  // mobile
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 48%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+
+    .third-card {
+      width: 100%;
+    }
+
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
