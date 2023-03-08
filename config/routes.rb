@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  root to: "pages#landing"
   get "uikit", to: "pages#uikit"
+
+  get "home", to: "pages#home"
 
   resources :users, only: [:show]
 

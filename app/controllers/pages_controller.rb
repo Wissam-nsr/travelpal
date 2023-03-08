@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [ :landing ]
 
   def home
     @users = User.near([current_user.latitude,current_user.longitude],100)
@@ -10,6 +10,9 @@ class PagesController < ApplicationController
         info_window_html: render_to_string(partial: "info_window", locals: {user: user})
       }
     end
+  end
+
+  def landing
   end
 
 end

@@ -88,7 +88,8 @@ travelers = User.all.drop(1)
 
 travelers.first(4).each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 10)
-  traveler.location = Geocoder.search(spot).first.address
+  traveler.latitude = spot[0]
+  traveler.longitude = spot[1]
   traveler.save
 end
 
@@ -96,7 +97,8 @@ travelers = travelers.drop(4)
 
 travelers.first(2).each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 50)
-  traveler.location = Geocoder.search(spot).first.address
+  traveler.latitude = spot[0]
+  traveler.longitude = spot[1]
   traveler.save
 end
 
@@ -104,7 +106,8 @@ travelers = travelers.drop(2)
 
 travelers.each do |traveler|
   spot = random_spot([demo_user.latitude, demo_user.longitude], 100)
-  traveler.location = Geocoder.search(spot).first.address
+  traveler.latitude = spot[0]
+  traveler.longitude = spot[1]
   traveler.save
 end
 
