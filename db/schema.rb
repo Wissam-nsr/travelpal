@@ -63,7 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_172126) do
 
   create_table "moments", force: :cascade do |t|
     t.string "description"
-    t.string "location"
     t.string "date", null: false
     t.bigint "trip_id", null: false
     t.datetime "created_at", null: false

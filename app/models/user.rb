@@ -15,6 +15,6 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, length: { minimum: 5, maximum: 20 }
 
-  has_many :chatrooms, dependent: :destroy
-  has_many :messages, through: :chatroom, dependent: :destroy
+  # has_many :chatrooms #dependent: :destroy
+  # has_many :messages, through: :chatroom, dependent: :destroy
 end
