@@ -1,11 +1,11 @@
 <%# <h1>Profile</h1>
 <%= render 'shared/profile', user: @user %>
 
-<%# <h2>Trip list</h2> %>
-<%# <%= render 'trip_list', trips: @trips %>
+<h2>Trip list</h2>
+<%# <%= render 'trip_list', trips: @trips %> %>
 
-<%# <h2>Moment list</h2> %>
-<%# <%= render 'moment_list', moments: @trips.all.last.moments %>
+<%# <h2>Moment list</h2>
+<%= render 'moment_list', moments: @trips.all.last.moments %> %> %>
 
-<h2>Map trips</h2>
-<%= render 'shared/trip_map', markers: @markers %>
+<h2> Map trips</h2>
+<%= render 'shared/trip_map', markers: @markers, photos: @photos %>
