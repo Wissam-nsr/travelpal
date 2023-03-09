@@ -4,7 +4,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = {
       apiKey: String,
-      markers: Array
+      markers: Array,
+      photos: Array
     }
 
   connect() {
@@ -19,6 +20,7 @@ export default class extends Controller {
       this.#addMarkersToMap()
       this.#fitMapToMarkers()
       this.#setRoutes()
+      this.#addPhotos()
     })
   }
 
@@ -32,6 +34,19 @@ export default class extends Controller {
           .addTo(this.map)
       })
     })
+  }
+
+  #addPhotos() {
+    this.photosValue.forEach((trip) => {
+      trip.forEach((marker) => {
+        const customMarker = document.createElement("div")
+        customMarker.innerHTML = marker.photo_html
+        new mapboxgl.Marker(customMarker)
+          .setLngLat([ marker.lng, marker.lat ])
+          .addTo(this.map)
+      })
+    })
+    console.log('photos')
   }
 
   #fitMapToMarkers() {
@@ -56,35 +71,27 @@ export default class extends Controller {
       trip.forEach((marker, index) => {
         const start = coords[index]
         const end = coords[index + 1]
-        // console.log(`start: ${start}, end: ${end}`)
         if (end !== undefined) {
           geojsons.push(this.getRoute(start, end, i, trip.length))
           i += 1
         }
-        // routes.forEach((route) => consoleLog(route));
       })
-      // console.log(routes)
-      // this.#addLayer(geojsons, i);
     })
   }
 
 
   async getRoute(start, end, i, length) {
-    console.log(i)
-    // console.log(`https://api.mapbox.com/directions/v5/mapbox/cycling/${start[1]},${start[0]};${end[1]},${end[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`)
     const query = await fetch(
       `https://api.mapbox.com/directions/v5/mapbox/driving/${start[1]},${start[0]};${end[1]},${end[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
     );
     const json = await query.json();
     const data = json.routes[0];
     const route = data.geometry.coordinates;
-    // console.log(route)
     if (i === 1) {
       this.routes = []
     }
 
     this.routes.push(route)
-    console.log("ok")
     const geojson = {
       type: 'Feature',
       properties: {},
@@ -93,7 +100,6 @@ export default class extends Controller {
         coordinates: this.routes.flat()
       }
     };
-    console.log(length - 1  )
     if (i === (length - 1)) {
 
       if (this.map.getSource(`route${i}`)) {
@@ -122,41 +128,4 @@ export default class extends Controller {
     }
   }
 
-   #addLayer (geojsons, i) {
-    // const routex = routes.flat(2)
-    // routes = routes.flat()
-    // console.log(routes)
-    // const geojson = {
-    //   type: 'Feature',
-    //   properties: {},
-    //   geometry: {
-    //     type: "MultiLineString",
-    //     coordinates: routes
-    //   }
-    // };
-    // console.log(geojson)
-    if (this.map.getSource(`route${i}`)) {
-      this.map.getSource(`route${i}`).setData(geojsons);
-    }
-    // otherwise, we'll make a new request
-    else {
-      this.map.addLayer({
-        id: `route${i}`,
-      type: 'line',
-      source: {
-        type: 'geojson',
-        data: geojsons
-      },
-      layout: {
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
-      paint: {
-        'line-color': '#3887be',
-        'line-width': 5,
-        'line-opacity': 0.75
-      }
-      });
-    }
-  }
 }
