@@ -1,0 +1,78 @@
+body{
+	background-color: #fafafa;
+	font-family: 'Droid Sans', sans-serif;
+
+}
+
+a{
+  text-decoration: none;
+}
+
+.Feed-card{
+	background: #ffffff;
+	border: 0.1rem solid #f2f2f2;
+	border-radius: 0.3rem;
+	width: 100%;
+	max-width: 60rem;
+	margin: auto;
+}
+
+.Feed-card-header{
+	padding: 0.3rem;
+  height: 0.2rem;
+  border-radius: 40rem;
+}
+
+.Feed-card-location-image{
+	border-radius: 0.7rem;
+	width: 100%;
+	max-width: 60rem;
+	margin-top: 2.5rem;
+}
+
+.Feed-card-user-image{
+	border-radius: 50%;
+	width: 4rem;
+	height: 4rem;
+	vertical-align: middle;
+}
+
+.Feed-card-location{
+	float: right;
+	width: 11rem;
+	padding-top: 1.3rem;
+	text-align: right;
+	color: #000000;
+
+}
+
+.Feed-card-user-name{
+	margin-left: 0.8rem;
+	font-weight:bold;
+  color: #262626;
+}
+
+.Feed-card-content{
+  padding: 0.2rem;
+}
+
+.Feed-card-content-user{
+  font-weight: bold;
+  color: #262626;
+}
+
+
+.Feed-card-footer{
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+}
+
+hr{
+  border: none;
+  border-bottom: 0.1rem solid #ccc;
+  margin-top: 0.3rem;
+  margin-bottom: 0rem;
+  padding-bottom: 0rem;
+
+}
