@@ -75,7 +75,7 @@ AVATARS_URL = [
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60"
 ]
 
-2.times do
+10.times do
   user = User.new
   user.email = Faker::Internet.email
   user.password = "123456"
@@ -148,7 +148,7 @@ DESCRIPTIONS = [
   "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."
 ]
 
-2.times do
+10.times do
   trip = Trip.new
   trip.name = TRIPS.sample
   trip.description = DESCRIPTIONS.sample
