@@ -1,0 +1,7 @@
+<div class = "profile-card">
+  <div class = "flex-left">
+    <%= render "components/avatar", user: @user %>
+    <h5><%= user.username %></h5>
+  </div>
+  <%= user.description %>
+</div>
