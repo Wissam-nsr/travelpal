@@ -1,11 +1,25 @@
-<%# <h1>Profile</h1>
-<%= render 'shared/profile', user: @user %>
+<div class = screen>
+  <%= render 'shared/profile', user: @user %>
 
-<h2>Trip list</h2>
-<%# <%= render 'trip_list', trips: @trips %> %>
-
-<%# <h2>Moment list</h2>
-<%= render 'moment_list', moments: @trips.all.last.moments %> %> %>
-
-<h2> Map trips</h2>
-<%= render 'shared/trip_map', markers: @markers, photos: @photos %>
+  <h2>Trip list</h2>
+  <%= render 'trip_list', trips: @trips %>
+  
+  <div>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="moment-tab" data-bs-toggle="tab" data-bs-target="#moment-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Moments</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="trip-map-tab" data-bs-toggle="tab" data-bs-target="#trip-map-tab-pane" type="button" role="tab" aria-controls="trip-map-tab-pane" aria-selected="false">Map</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="moment-tab-pane" role="tabpanel" aria-labelledby="moment-tab" tabindex="0">
+          <%= render 'moment_list', moments: @trips.all.last.moments %>
+        </div>
+        <div class="tab-pane fade" id="trip-map-tab-pane" role="tabpanel" aria-labelledby="trip-map-tab" tabindex="0">
+          <%= render 'shared/trip_map', markers: @markers, photos: @photos %>
+        </div>
+      </div>
+  </div>
+</div>
