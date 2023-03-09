@@ -15,28 +15,28 @@ class User < ApplicationRecord
 
   def after_geocode
     if self.location
-    results = Geocoder.search([self.latitude, self.longitude])
-    self.geocoder_object = results.first.data
-  elsif self.latitude
-    results = Geocoder.search([self.latitude, self.longitude])
-    self.geocoder_object = results.first.data
-    self.location = results.first.data.dig('address', 'city_district')
-  end
-end
-
-def last_trip_moments
-  moments = []
-  if trips.any?
-    trips.last.moments.each do |moment|
-      moments << moment
+      results = Geocoder.search([self.latitude, self.longitude])
+      self.geocoder_object = results.first.data
+    elsif self.latitude
+      results = Geocoder.search([self.latitude, self.longitude])
+      self.geocoder_object = results.first.data
+      self.location = results.first.data.dig('address', 'city_district')
     end
   end
-  moments
-end
 
-def last_trip_cities
-  last_trip_moments.map {|moment| moment.nearest_city }
-end
+  def last_trip_moments
+    moments = []
+    if trips.any?
+      trips.last.moments.each do |moment|
+        moments << moment
+      end
+    end
+    moments
+  end
+
+  def last_trip_cities
+    last_trip_moments.map {|moment| moment.nearest_city }
+  end
 
 # has_many :chatrooms #dependent: :destroy
 # has_many :messages, through: :chatroom, dependent: :destroy
