@@ -30,7 +30,8 @@ demo_user.username = "Stephan_Supertramp"
 demo_user.description = "Backpacking alone in the wild Australia after a trip in Japan. Looking fro new friends and adventures"
 demo_user.location = "380 Roma St, Brisbane City QLD 4000, Australie"
 demo_user.avatar.attach(io: URI.open("https://img.freepik.com/photos-gratuite/touriste-masculin-serieux-porte-sac-dos-equipement-necessaire-pour-voyageur-aime-voyager-longues-distances-prefere-vacances-actives-boit-du-cafe_273609-33658.jpg?w=740&t=st=1678187049~exp=1678187649~hmac=42bc387501e174ec55f1ab9bff6db346b7cfb4da9f7ba647a06522d70cf613ba"), filename: "nes.png", content_type: "image/png")
-demo_user.save
+demo_user.save!
+
 
 # 10 other users:
 BIOS = [
@@ -74,7 +75,7 @@ AVATARS_URL = [
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60"
 ]
 
-10.times do
+2.times do
   user = User.new
   user.email = Faker::Internet.email
   user.password = "123456"
@@ -147,7 +148,7 @@ DESCRIPTIONS = [
   "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."
 ]
 
-15.times do
+2.times do
   trip = Trip.new
   trip.name = TRIPS.sample
   trip.description = DESCRIPTIONS.sample
@@ -236,7 +237,7 @@ STEPS = {
 
 Trip.all.each do |trip|
   step_list = STEPS[trip.name].map { |step| step }
-  rand(3..6).times do
+  rand(3..4).times do
     step = Step.new
     step.trip = trip
     step.location = step_list.sample
@@ -255,7 +256,7 @@ puts "Creating between 2 and 5 Moments per Steps"
 puts "..."
 
 Step.all.each_with_index do |step, index|
-  rand(2..5).times do
+  rand(2..3).times do
     moment = Moment.new
     moment.trip = step.trip
     moment.description = Faker::Lorem.sentence
