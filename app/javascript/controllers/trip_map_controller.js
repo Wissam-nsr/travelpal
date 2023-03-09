@@ -8,6 +8,7 @@ export default class extends Controller {
     }
 
   connect() {
+    this.routes = []
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
@@ -43,35 +44,33 @@ export default class extends Controller {
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 3 })
   }
 
-  async consoleLog(x) {
-    const a = await x;
-    console.log(a);
-  };
-
   #setRoutes() {
       // create a function to make a directions request
-    let routes = [];
     this.markersValue.forEach((trip) => {
       let coords = [];
       trip.forEach((marker) => {
         coords.push([marker.lat, marker.lng])
       })
+      let i = 1
+      let geojsons = [];
       trip.forEach((marker, index) => {
         const start = coords[index]
         const end = coords[index + 1]
         // console.log(`start: ${start}, end: ${end}`)
         if (end !== undefined) {
-          routes.push(this.getRoute(start, end))
+          geojsons.push(this.getRoute(start, end, i, trip.length))
+          i += 1
         }
+        // routes.forEach((route) => consoleLog(route));
       })
+      // console.log(routes)
+      // this.#addLayer(geojsons, i);
     })
-    routes = routes.flat();
-    // routes.forEach((route) => consoleLog(route));
-    this.#addLayer(routes);
   }
 
 
-  async getRoute(start, end) {
+  async getRoute(start, end, i, length) {
+    console.log(i)
     // console.log(`https://api.mapbox.com/directions/v5/mapbox/cycling/${start[1]},${start[0]};${end[1]},${end[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`)
     const query = await fetch(
       `https://api.mapbox.com/directions/v5/mapbox/driving/${start[1]},${start[0]};${end[1]},${end[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
@@ -79,26 +78,31 @@ export default class extends Controller {
     const json = await query.json();
     const data = json.routes[0];
     const route = data.geometry.coordinates;
-    return route
-  }
+    // console.log(route)
+    if (i === 1) {
+      this.routes = []
+    }
 
-  #addLayer(routes) {
+    this.routes.push(route)
+    console.log("ok")
     const geojson = {
       type: 'Feature',
       properties: {},
       geometry: {
         type: 'LineString',
-        coordinates: routes
+        coordinates: this.routes.flat()
       }
     };
+    console.log(length - 1  )
+    if (i === (length - 1)) {
 
-    if (this.map.getSource('route')) {
-      this.map.getSource('route').setData(geojson);
-    }
-    // otherwise, we'll make a new request
-    else {
-      this.map.addLayer({
-        id: 'route',
+      if (this.map.getSource(`route${i}`)) {
+        this.map.getSource(`route${i}`).setData(geojson);
+      }
+      // otherwise, we'll make a new request
+      else {
+        this.map.addLayer({
+          id: `route${i}`,
         type: 'line',
         source: {
           type: 'geojson',
@@ -109,80 +113,50 @@ export default class extends Controller {
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#000000',
+          'line-color': '#3887be',
           'line-width': 5,
           'line-opacity': 0.75
         }
-      });
+        });
+      }
     }
   }
 
+   #addLayer (geojsons, i) {
+    // const routex = routes.flat(2)
+    // routes = routes.flat()
+    // console.log(routes)
+    // const geojson = {
+    //   type: 'Feature',
+    //   properties: {},
+    //   geometry: {
+    //     type: "MultiLineString",
+    //     coordinates: routes
+    //   }
+    // };
+    // console.log(geojson)
+    if (this.map.getSource(`route${i}`)) {
+      this.map.getSource(`route${i}`).setData(geojsons);
+    }
+    // otherwise, we'll make a new request
+    else {
+      this.map.addLayer({
+        id: `route${i}`,
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: geojsons
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#3887be',
+        'line-width': 5,
+        'line-opacity': 0.75
+      }
+      });
+    }
+  }
 }
-
-// -------------------------------------------------------------
-
-// #setRoutes() {
-//       // create a function to make a directions request
-//     this.markersValue.forEach((trip) => {
-//       let coord = "";
-//       trip.forEach((marker, index) => {
-//         coord += marker.lat + ',' + marker.lng + ';'
-//         // if (trip[index + 1] !== null) {
-//         //   const start = [marker.lat, marker.lng]
-//         //   const end = [trip[index + 1].lat, trip[index + 1].lng]
-//         //   this.getRoute(start, end)
-//         // }
-//       })
-//     coord = coord.slice(0, -1)
-//     this.getRoute(coord)
-//     })
-//   }
-
-
-//   async getRoute(coord) {
-//     // make a directions request using cycling profile
-//     // an arbitrary start will always be the same
-//     console.log(coord)
-//     // only the end or destination will change
-//     const query = await fetch(
-//       `https://api.mapbox.com/directions/v5/mapbox/cycling/${coord}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
-//       // `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
-//     );
-//     const json = await query.json();
-//     const data = json.routes[0];
-//     const route = data.geometry.coordinates;
-//     console.log(route)
-//     const geojson = {
-//       type: 'Feature',
-//       properties: {},
-//       geometry: {
-//         type: 'LineString',
-//         coordinates: route
-//       }
-//     };
-//     // if the route already exists on the map, we'll reset it using setData
-//     if (this.map.getSource('route')) {
-//       this.map.getSource('route').setData(geojson);
-//     }
-//     // otherwise, we'll make a new request
-//     else {
-//       this.map.addLayer({
-//         id: 'route',
-//         type: 'line',
-//         source: {
-//           type: 'geojson',
-//           data: geojson
-//         },
-//         layout: {
-//           'line-join': 'round',
-//           'line-cap': 'round'
-//         },
-//         paint: {
-//           'line-color': '#3887be',
-//           'line-width': 5,
-//           'line-opacity': 0.75
-//         }
-//       });
-//     }
-//     // add turn instructions here at the end
-//   }
