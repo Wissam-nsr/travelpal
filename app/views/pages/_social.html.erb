@@ -6,7 +6,7 @@
 <p><%= cl_image_tag @current_user.avatar.key %></p>
 
 <h4>RADIUS</h4>
-<form method="get" action="/">
+<form method="get" action="/home">
   <select name="radius">
     <option value="5">5 km radius</option>
     <option value="10">10 km radius</option>
@@ -18,12 +18,15 @@
 <h4>FEED</h4>
 <% @users.each do |user| %>
   <% unless user.id == @current_user.id %>
-    <p><%= user.username %></p>
+    <p>username: <%= user.username %></p>
     <p>avatar: <%= cl_image_tag user.avatar.key %></p>
-    <p>current_city: <%= user.geocoder_object["address"]["city"] %></p>
-    <p>distance: <%= Geocoder::Calculations.distance_between([@current_user.geocoder_object["lat"],@current_user.geocoder_object["lon"]], [user.geocoder_object["lat"],user.geocoder_object["lon"]]) %></p>
-    <p>moments: <% user.trips.last.moments.each do |moment| %>
-      <%= cl_image_tag moment.photo.key %>
-      <% end %></p>
-  <% end %>
+    <p>moments:</p>
+      <% user.last_trip_moments.each do |moment|%>
+      <p> photo of moment: <%= cl_image_tag moment.photo.key %></p>
+      <p> city of moment: <%= moment.geocoder_object["address"]["city"] %></p>
+      <p>distance of moment to me: <%= Geocoder::Calculations.distance_between([@current_user.geocoder_object["lat"],@current_user.geocoder_object["lon"]], [moment.geocoder_object["lat"],moment.geocoder_object["lon"]]) %>
+      <% end %>
+   <% end %>
 <% end %>
+
+<%# User.all.each {|u| u.trips.last.moments.each {|m| ms.push(m[:geocoder_object]["address"]["city"])} } %>
