@@ -43,45 +43,55 @@ export default class extends Controller {
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 3 })
   }
 
+  async consoleLog(x) {
+    const a = await x;
+    console.log(a);
+  };
+
   #setRoutes() {
       // create a function to make a directions request
+    let routes = [];
     this.markersValue.forEach((trip) => {
       let coords = [];
       trip.forEach((marker) => {
         coords.push([marker.lat, marker.lng])
       })
-      console.log(coords)
       trip.forEach((marker, index) => {
         const start = coords[index]
         const end = coords[index + 1]
-        console.log(`start: ${start}, end: ${end}`)
-        this.getRoute(start, end)
+        // console.log(`start: ${start}, end: ${end}`)
+        if (end !== undefined) {
+          routes.push(this.getRoute(start, end))
+        }
       })
     })
+    routes = routes.flat();
+    // routes.forEach((route) => consoleLog(route));
+    this.#addLayer(routes);
   }
 
 
   async getRoute(start, end) {
-    // make a directions request using cycling profile
-    // an arbitrary start will always be the same
-    // only the end or destination will change
-    console.log(`https://api.mapbox.com/directions/v5/mapbox/cycling/${start[1]},${start[0]};${end[1]},${end[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`)
+    // console.log(`https://api.mapbox.com/directions/v5/mapbox/cycling/${start[1]},${start[0]};${end[1]},${end[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`)
     const query = await fetch(
       `https://api.mapbox.com/directions/v5/mapbox/driving/${start[1]},${start[0]};${end[1]},${end[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
     );
     const json = await query.json();
     const data = json.routes[0];
     const route = data.geometry.coordinates;
-    console.log(route)
+    return route
+  }
+
+  #addLayer(routes) {
     const geojson = {
       type: 'Feature',
       properties: {},
       geometry: {
         type: 'LineString',
-        coordinates: route
+        coordinates: routes
       }
     };
-    // if the route already exists on the map, we'll reset it using setData
+
     if (this.map.getSource('route')) {
       this.map.getSource('route').setData(geojson);
     }
@@ -99,14 +109,14 @@ export default class extends Controller {
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#3887be',
+          'line-color': '#000000',
           'line-width': 5,
           'line-opacity': 0.75
         }
       });
     }
-    // add turn instructions here at the end
   }
+
 }
 
 // -------------------------------------------------------------
