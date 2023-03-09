@@ -1,0 +1,8 @@
+<div>
+  <% moments.each do |moment| %>
+    <%= cl_image_tag moment.photo.key, alt: "Photo in #{moment.trip.name}, date: #{moment.date}" %>
+    <h5><%= moment.date %></h5>
+    <% location = Geocoder.search([moment.latitude,moment.longitude]).first.address  %>
+    <h5><%= location unless location.nil? %></h5>
+  <% end %>
+</div>

@@ -1,17 +1,11 @@
-<h2><%= @user.username %></h2>
-<p><%= @user.avatar %></p>
-<p><%= @user.description %></p>
-<p><%= @user.location %></p>
+<%# <h1>Profile</h1>
+<%= render 'shared/profile', user: @user %>
 
-<%= @user.trips.each do |trip|%>
-  <p><%= trip.photo %></p>
-  <p><%= trip.name %></p>
-<% end %>
+<%# <h2>Trip list</h2> %>
+<%# <%= render 'trip_list', trips: @trips %>
 
-<%= link_to "End the trip", trip_path %>
+<%# <h2>Moment list</h2> %>
+<%# <%= render 'moment_list', moments: @trips.all.last.moments %>
 
-<%= @user.moments.each do |moment| %>
-  <p><%= moment.location %></p>
-  <p><%= moment.date %></p>
-  <p><%= moment.photo %></p>
-<% end %>
+<h2>Map trips</h2>
+<%= render 'shared/trip_map', markers: @markers %>
