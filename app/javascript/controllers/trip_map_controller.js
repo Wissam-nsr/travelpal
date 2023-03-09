@@ -12,7 +12,7 @@ export default class extends Controller {
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/wissamlib/cleb8e6p1001501kn8vu764b6"
+      style: "mapbox://styles/ddlire/clerc593f00i801lk3homtmek"
     })
     global.map = this.map
     this.map.on('load', () => {
