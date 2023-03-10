@@ -1,18 +1,20 @@
 <ul class="navbar-buttons">
-	<li>
+	<li> <%= link_to home_path do %>
     <button class="Feed">
       <i class="fa-solid fa-house"></i>
       <br>
       <span>Feed</span>
     </button>
+    <% end %>
   </li>
 
-  <li>
+  <li> <%= link_to map_path do %>
     <button class="Around">
         <i class="fa-solid fa-location-dot"></i>
         <br>
         <span>Around</span>
     </button>
+    <% end %>
   </li>
 
   <li>

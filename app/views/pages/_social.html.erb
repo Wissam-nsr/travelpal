@@ -1,15 +1,8 @@
-<h4>FEED</h4>
-<% users.each do |user| %>
-  <% unless user.id == current_user.id %>
-    <p>username: <%= user.username %></p>
-    <p><%= cl_image_tag user.avatar.key %></p>
-    <p>moments:</p>
-      <% user.last_trip_moments.each do |moment|%>
-      <p> photo of moment: <%= cl_image_tag moment.photo.key %></p>
-      <p> city of moment:
-        <%= moment.nearest_city%>
-      </p>
-      <p>distance of moment to me: <%= Geocoder::Calculations.distance_between([current_user.geocoder_object["lat"].to_i,current_user.geocoder_object["lon"].to_i], [moment.geocoder_object["lat"].to_i,moment.geocoder_object["lon"].to_i]) %>
-      <% end %>
-   <% end %>
-<% end %>
+
+<div class="card-grid">
+  <% users.each do |user| %>
+    <% unless user.id == current_user.id %>
+    <%= render partial: "components/card_feed", locals: {user: user} %>
+    <% end %>
+  <% end %>
+</div>

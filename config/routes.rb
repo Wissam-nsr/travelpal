@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "uikit", to: "pages#uikit"
 
   get "home", to: "pages#home"
+  get "map", to: "pages#map"
 
   resources :users, only: [:show]
 
