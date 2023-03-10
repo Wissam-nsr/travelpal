@@ -7,4 +7,12 @@ class Moment < ApplicationRecord
   validates :longitude, presence: true
   validates :date, presence: true
   validates :photo, attached: true
+
+  after_validation :geocode
+
+  def geocode
+    results = Geocoder.search([self.latitude, self.longitude])
+    self.geocoder_object = results.first.data
+  end
+
 end
