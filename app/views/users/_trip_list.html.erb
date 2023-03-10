@@ -1,7 +1,9 @@
-<div>
+<div class="long-card">
   <h5><strong>My trips</strong></h5>
   <div class = icone-list>
-    <i class="fa-regular fa-square-plus"></i>
+    <%= link_to new_trip_path(trips.first.user) do %>
+      <i class="fa-regular fa-square-plus text-dark"></i>
+    <% end %>
     <% trips.each do |trip| %>
       <%= cl_image_tag trip.photo.key, alt: "Photo for the trip '#{trip.name}'", height: 80, width: 80 %>
     <% end %>
