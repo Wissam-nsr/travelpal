@@ -1,5 +1,7 @@
-<div>
-  <%= cl_image_tag user.avatar.key, alt: "#{user.username} avatar" %>
-  <h5><%= user.username %></h5>
+<div class = "profile-card">
+  <div class = "flex-left">
+    <%= render "components/avatar", user: @user %>
+    <h5><%= user.username %></h5>
+  </div>
   <%= user.description %>
 </div>

@@ -1,8 +1,9 @@
 <div>
-  <% trips.each do |trip| %>
-    <%= cl_image_tag trip.photo.key, alt: "Photo for the trip '#{trip.name}'" %>
-    <h5><%= trip.name %></h5>
-    <p><%= trip.description %></p>
-  <% end %>
+  <h5><strong>My trips</strong></h5>
+  <div class = icone-list>
+    <i class="fa-regular fa-square-plus"></i>
+    <% trips.each do |trip| %>
+      <%= cl_image_tag trip.photo.key, alt: "Photo for the trip '#{trip.name}'", height: 80, width: 80 %>
+    <% end %>
+  </div>
 </div>
-
