@@ -13,8 +13,10 @@
   </head>
 
   <body>
-  <%= render "shared/flashes" %>
-
-    <%= yield %>
+    <%= render "shared/flashes" %>
+      <%= yield %>
+    <div>
+      <%= render partial: "components/navbar_bottom" %>
+    </div>
   </body>
 </html>

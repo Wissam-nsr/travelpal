@@ -15,4 +15,14 @@ class Moment < ApplicationRecord
     self.geocoder_object = results.first.data
   end
 
+  def nearest_city
+    if self.geocoder_object["address"]["municipality"].present?
+      self.geocoder_object["address"]["municipality"]
+    elsif self.geocoder_object["address"]["city_district"].present?
+      self.geocoder_object["address"]["city_district"]
+    else
+      "somehwere in Australia"
+    end
+  end
+
 end
