@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "landing", to: "pages#landing"
 
+  get "map", to: "pages#map"
+
   resources :users, only: [:show]
 
   resources :trips, only: [:new, :create, :update, :destroy] do

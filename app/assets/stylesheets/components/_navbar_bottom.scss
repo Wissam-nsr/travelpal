@@ -9,6 +9,10 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 0rem;
+  position: fixed;
+  bottom: -1rem;
+  left: 0;
+  z-index: 4;
 
   li {
     display: flex;

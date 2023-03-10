@@ -15,6 +15,7 @@ class PagesController < ApplicationController
       end
     else
       redirect_to landing_path unless user_signed_in?
+    end
   end
 
   def landing
