@@ -1,0 +1,41 @@
+.photo {
+  height: 15rem;
+  width: 20rem;
+  filter: drop-shadow(1px 1px 1px);
+  transform: rotate(-2deg);
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 45px;
+}
+
+.bg {
+  filter: blur(1px) brightness(0.7) opacity(50%);
+  height: 15rem;
+  width: 20rem;
+  transform: rotate(-6deg);
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  z-index: 0;
+
+  &:nth-child(2n+0) {
+    transform: rotate(-6deg);
+    left: 40px;
+  }
+  &:nth-child(2n+1) {
+    transform: rotate(6deg);
+    left: 40px;
+  }
+}
+
+.wrapper h5 {
+  margin: 1rem;
+
+  &:nth-child(2n+0) {
+    text-align: end;
+  }
+  &:nth-child(2n+1) {
+    text-align: start;
+  }
+}

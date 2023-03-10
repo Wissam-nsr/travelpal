@@ -148,7 +148,7 @@ DESCRIPTIONS = [
   "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."
 ]
 
-10.times do
+15.times do
   trip = Trip.new
   trip.name = TRIPS.sample
   trip.description = DESCRIPTIONS.sample

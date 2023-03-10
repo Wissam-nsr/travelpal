@@ -1,10 +1,8 @@
 <div class = screen>
   <%= render 'shared/profile', user: @user %>
 
-  <h2>Trip list</h2>
   <%= render 'trip_list', trips: @trips %>
-  
-  <div>
+
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="moment-tab" data-bs-toggle="tab" data-bs-target="#moment-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Moments</button>
@@ -13,6 +11,7 @@
           <button class="nav-link" id="trip-map-tab" data-bs-toggle="tab" data-bs-target="#trip-map-tab-pane" type="button" role="tab" aria-controls="trip-map-tab-pane" aria-selected="false">Map</button>
         </li>
       </ul>
+  <div class="feed mt-5">
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="moment-tab-pane" role="tabpanel" aria-labelledby="moment-tab" tabindex="0">
           <%= render 'moment_list', moments: @trips.all.last.moments %>
