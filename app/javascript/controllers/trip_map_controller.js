@@ -10,6 +10,7 @@ export default class extends Controller {
     }
 
   connect() {
+    console.log('coucuo je suis la trip map')
     this.routes = []
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
@@ -18,6 +19,7 @@ export default class extends Controller {
     })
     global.map = this.map
     this.map.on('load', () => {
+      console.log('loaded map')
       this.#addMarkersToMap()
       this.#fitMapToMarkers()
       this.#setRoutes()

@@ -1,10 +1,10 @@
-<div class="screen" style="width: 100%;">
-  <div class="show-user-top" style="height: calc(42vh - 52px); width: 100%;">
+<div class="screen" style="width: 100%; height: 100vh;">
+  <div class="show-user-top" style="height: calc(45% - 52px); width: 100%;">
     <%= render 'shared/profile', user: @user %>
     <%= render 'trip_list', trips: @trips %>
   </div>
 
-  <div class="show-user-bottom" style="height: 57vh;">
+  <div class="show-user-bottom" style="height: 55%; width: 100%;">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="moment-tab" data-bs-toggle="tab" data-bs-target="#moment-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Moments</button>

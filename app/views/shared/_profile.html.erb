@@ -1,6 +1,6 @@
 <div class = "profile-card">
   <div class = "flex-left">
-    <%= cl_image_tag user.avatar.key, class: "Feed-card-user-image"%>
+    <%= cl_image_tag user.avatar.key, class: "user-image", transformation: 'avatar'%>
     <h5><strong><%= user.username %></strong></h5>
     <%= link_to destroy_user_session_path do %>
       <i class="fa-solid fa-right-from-bracket text-danger text-end fs-3"></i>
