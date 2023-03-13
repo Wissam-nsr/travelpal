@@ -3,7 +3,7 @@
       <% location = Geocoder.search([moment.latitude,moment.longitude]).first.address  %>
       <% location = location.split(',')[0] %>
       <h5><%= location unless location.nil? %></h5>
-    <div class="wrapper">
+    <div class="photo-stack">
       <%= cl_image_tag moment.photo.key, class: "photo" %>
       <%= cl_image_tag moment.photo.key, class: "bg" %>
     </div>

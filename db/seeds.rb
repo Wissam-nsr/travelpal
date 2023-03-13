@@ -116,7 +116,7 @@ puts "Done ! (#{User.count} Users)"
 puts "Demo user: stephan@demo.com, pwd: 123456"
 
 # TRIPS
-puts "Creating 15 Trips"
+puts "Creating 14 Trips"
 puts "..."
 
 TRIPS = [
@@ -148,18 +148,24 @@ DESCRIPTIONS = [
   "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."
 ]
 
-15.times do
+14.times do
   trip = Trip.new
   trip.name = TRIPS.sample
   trip.description = DESCRIPTIONS.sample
   trip.photo.attach(io: URI.open(TRIP_PHOTOS.sample), filename: "nes.png", content_type: "image/png")
-  trip.user = User.all.sample
+  trip.user = User.all.first
   trip.save
 end
 
-Trip.all.first(5).each do |trip|
-  trip.ended = true
+trips = Trip.all.map { |trip| trip }
+
+trips.drop(3)
+i = 1
+
+trips.each do |trip|
+  trip.user = User.all[i]
   trip.save
+  i += 1
 end
 
 puts "Done ! (#{Trip.count} Trips)"
@@ -174,7 +180,7 @@ STEPS = {
     "Barossa Valley",
     "Cape Jervis",
     "Victor Harbor",
-    "Robe",
+    "Robe, South Australia",
     "Mount Gambier",
     "Port Fairy",
     "Port Campbell National Park",
@@ -184,10 +190,10 @@ STEPS = {
     "Melbourne"
   ],
   "West Coast" => [
-    "Broome WA",
+    "Broome, Western Australia",
     "Port Headland",
     "Karratha",
-    "Exmouth WA" ,
+    "Exmouth, Western Australia" ,
     "Coral Bay",
     "Carnarvon" ,
     "Monkey Mia" ,
@@ -197,10 +203,10 @@ STEPS = {
     "Perth"
   ],
   "Est Coast" => [
-    "Cape Tribulation QLD",
+    "Cape Tribulation, Queensland",
     "Cairns",
     "Airlie Beach",
-    "Rockhampton QLD",
+    "Rockhampton, Queensland",
     "Fraser Island",
     "Noosa",
     "Brisbane",
@@ -237,7 +243,7 @@ STEPS = {
 
 Trip.all.each do |trip|
   step_list = STEPS[trip.name].map { |step| step }
-  rand(3..4).times do
+  rand(2..5).times do
     step = Step.new
     step.trip = trip
     step.location = step_list.sample
