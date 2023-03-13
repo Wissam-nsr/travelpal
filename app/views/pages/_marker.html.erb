@@ -1,5 +1,1 @@
-<% if user = current_user %>
-<%= cl_image_tag current_user.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered.current-user"%>
-<% else %>
-  <%= cl_image_tag user.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered"%>
-<% end %>
+<%= cl_image_tag user.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered"%>

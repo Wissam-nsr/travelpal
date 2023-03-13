@@ -13,14 +13,6 @@ class PagesController < ApplicationController
           marker_html: render_to_string(partial: "marker", locals: {user: user})
         }
       end
-      @marker_current_user = current_user.geocoded.map do |user|
-        {
-        lat: user.latitude,
-        lng: user.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: {user: current_user}),
-        marker_html: render_to_string(partial: "marker", locals: {user: current_user})
-        }
-      end
     else
       redirect_to landing_path unless user_signed_in?
     end

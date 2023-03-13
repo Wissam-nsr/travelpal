@@ -10,11 +10,8 @@
 .avatar-bordered {
   width: 3rem;
   border-radius: 50%;
-  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.1);
   border: white 0.1rem solid;
-}
-
-.avatar-bordered.current-user {
   border-color: black;
 }
 

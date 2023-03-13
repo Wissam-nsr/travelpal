@@ -1,7 +1,9 @@
   <div class="Feed-card">
     <div class="Feed-card-header">
-      <%= cl_image_tag user.avatar.key, class: "Feed-card-user-image"%>
-      <a class="Feed-card-user-name"> <%= user.username %> </a>
+      <div class = "feed-card-user-description">
+        <%= cl_image_tag user.avatar.key, class: "Feed-card-user-image"%>
+        <a class="Feed-card-user-name"> <%= user.username %> </a>
+      </div>
       <div class="Feed-card-location">
         <i class="fa-solid fa-location-dot"></i>
           <strong><%= user.trips.last.moments.last.nearest_city%></strong>
