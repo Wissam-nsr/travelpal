@@ -14,9 +14,7 @@
 
   <body>
     <%= render "shared/flashes" %>
-      <%= yield %>
-    <div>
-      <%= render partial: "components/navbar_bottom", locals: {user: current_user} %>
-    </div>
+    <%= yield %>
+    <%= render "components/navbar_bottom", user: current_user %>
   </body>
 </html>

@@ -1,18 +1,18 @@
 .screen {
   width: 100vw;
-  background-image: asset_path('squared-paper-texture.jpg');
+  padding-top: 1rem;
+  // background-image: asset_path("squared-paper-texture.jpg");
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-.wrapper {
-  position: relative;
-  width: 100%;
-  height: 28vh;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
+  p {
+    font-size: 1.2rem;
+  }
+
+  h5 {
+    font-size: 1.6rem;
+  }
 }
 
 .flex-left {
@@ -20,37 +20,36 @@
   align-items: center;
   justify-content: flex-start;
   margin: 1rem;
-}
-
-.center-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
   gap: 2rem;
 }
 
 .long-card {
+  width: 80%;
+  height: fit-content;
+  margin: 0.5rem auto;
+}
+
+.profile-card {
   width: 100%;
   height: fit-content;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  h5 {
-    margin-left: 1rem;
-  }
+  padding-left: 2rem;
+  margin: 0 auto;
 }
 
 .feed {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  background-image: asset_path('squared-paper-texture.jpg');
-  background-position: cover;
+  // display: grid;
+  // grid-template-columns: 1fr;
+  background: asset_url('squared-paper-texture.jpg');
+  background-size: contain;
 }
 
-.mapboxgl-map {
-  overflow: visible !important;
-}
+// .mapboxgl-map {
+//   overflow: visible !important;
+// }
+
+// .mapboxgl-canvas {
+//   height: 100% !important;
+//   width: 100% !important;
+//   object-fit: cover;
+// }

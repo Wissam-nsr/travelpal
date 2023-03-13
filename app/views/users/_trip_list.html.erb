@@ -1,11 +1,15 @@
 <div class="long-card">
-  <h5><strong>My trips</strong></h5>
+  <h5>My trips</h5>
   <div class = icone-list>
-    <%= link_to new_trip_path(trips.first.user) do %>
+    <%= link_to new_trip_path  do %>
       <i class="fa-regular fa-square-plus text-dark"></i>
     <% end %>
-    <% trips.each do |trip| %>
-      <%= cl_image_tag trip.photo.key, alt: "Photo for the trip '#{trip.name}'", height: 80, width: 80 %>
+    <% unless trips.empty? %>
+      <% trips.each do |trip| %>
+        <%= link_to user_path(trip: trip) do %>
+          <%= cl_image_tag trip.photo.key, alt: "Photo for the trip '#{trip.name}'", height: 80, width: 80 %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -1,7 +1,12 @@
-<div class = "long-card">
+<div class = "profile-card">
   <div class = "flex-left">
-    <%= render "components/avatar", user: @user %>
-    <h5><%= user.username %></h5>
+    <%= cl_image_tag user.avatar.key, class: "user-image", transformation: 'avatar'%>
+    <h5><strong><%= user.username %></strong></h5>
+    <%= link_to destroy_user_session_path do %>
+      <i class="fa-solid fa-right-from-bracket text-danger text-end fs-3"></i>
+    <% end %>
   </div>
-  <p><%= user.description %></p>
 </div>
+  <div class="long-card">
+    <p><%= user.description %></p>
+  </div>
