@@ -17,9 +17,8 @@
     <% end %>
   </li>
 
-  <li> <%= link_to new_trip_moment_path(current_user.trips.last) do %>
+    <li> <%= link_to new_trip_moment_path(user.trips.last) do %>
       <button class="Pic_of_day">
-
           <br>
           <span>Pic of the Day</span>
       </button>

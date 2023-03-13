@@ -1,6 +1,10 @@
 class MomentsController < ApplicationController
   def new
-    @moment = Moment.new
+    if current_user.trips.empty?
+      redirect_to user_path(current_user)
+    else
+      @moment = Moment.new
+    end
   end
 
   def create
