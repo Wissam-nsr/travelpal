@@ -17,6 +17,7 @@
     <% end %>
   </li>
 
+<% if current_user.trips.any? %>
     <li> <%= link_to new_trip_moment_path(user.trips.last) do %>
       <button class="Pic_of_day">
           <br>
@@ -24,6 +25,15 @@
       </button>
     <% end %>
   </li>
+  <% else %>
+  <li> <%= link_to user_path(user) do %>
+      <button class="Pic_of_day">
+          <br>
+          <span>Pic of the Day</span>
+      </button>
+    <% end %>
+  </li>
+<% end %>
 
   <li> <%= link_to "#" do %>
       <button class="Chats">

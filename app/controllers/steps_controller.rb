@@ -11,10 +11,7 @@ before_action :set_step, only: [:edit, :update, :destroy]
   end
 
   def new
-    if current_user.trips.any?
       @step = Step.new
-    else
-      render :new, status: :unprocessable_entity
   end
 
   def create
