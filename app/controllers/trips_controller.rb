@@ -9,7 +9,7 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @trip.user = current_user
     if @trip.save
-      redirect_to user_path
+      redirect_to user_path(user)
     else
       render :new, status: :unprocessable_entity
     end

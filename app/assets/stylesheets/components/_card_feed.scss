@@ -1,7 +1,6 @@
 body{
 	background-color: #ffff;
 	font-family: 'Poppins', sans-serif;
-
 }
 
 a{
@@ -14,7 +13,8 @@ a{
 	border-radius: 0.3rem;
 	width: 100%;
 	max-width: 60rem;
-	margin: auto;
+	margin: 1.5rem auto;
+  box-shadow: 1px 1px 10px #00000040;
 }
 
 .Feed-card-header{
