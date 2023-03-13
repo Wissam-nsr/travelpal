@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
     @current_markers = []
     @trip.steps.order(:date).each do |step|
-      current_markers << {
+      @current_markers << {
         lat: step.latitude,
         lng: step.longitude,
         }
