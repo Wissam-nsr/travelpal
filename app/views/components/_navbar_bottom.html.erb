@@ -17,7 +17,7 @@
     <% end %>
   </li>
 
-  <li> <%= link_to "#" do %>
+  <li> <%= link_to new_trip_step_path(current_user.trips.last) do %>
       <button class="Pic_of_day">
 
           <br>
@@ -44,6 +44,14 @@
     </button>
     <% end %>
   </li>
+    <li> <%= link_to new_trip_moment_path(current_user.trips.last) do %>
+    <button class="Profile">
+        <i class="fa-solid fa-user"></i>
+        <br>
+        <span>Add new moment</span>
+    </button>
+    <% end %>
+  </li>
   <% end %>
-  
+
 </ul>

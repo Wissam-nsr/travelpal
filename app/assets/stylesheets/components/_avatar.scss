@@ -2,6 +2,7 @@
   width: 3rem;
   border-radius: 50%;
 }
+
 .avatar-large {
   width: 5.6rem;
   border-radius: 50%;
@@ -9,9 +10,14 @@
 .avatar-bordered {
   width: 3rem;
   border-radius: 50%;
-  box-shadow: 0 0.1rem 0.2rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
   border: white 0.1rem solid;
 }
+
+.avatar-bordered.current-user {
+  border-color: black;
+}
+
 .avatar-square {
   width: 4rem;
   border-radius: 0;

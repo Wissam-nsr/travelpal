@@ -15,11 +15,16 @@ before_action :set_step, only: [:edit, :update, :destroy]
   end
 
   def create
-    @trip = Trip.find(params[:trip_id])
+    if @trip = current_user.trips.last.present?
+      @trip = current_user.trips.last
+    else
+      redirect_to user_path(current_user)
+    end
     @step = Step.new(step_params)
     @step.trip = @trip
+    @step.date = Date.today
     if @step.save
-      redirect_to user_path
+      redirect_to user_path(current_user)
     else
       render :new, status: :unprocessable_entity
     end
@@ -43,7 +48,7 @@ before_action :set_step, only: [:edit, :update, :destroy]
   private
 
   def step_params
-    params.require(:step).permit(:name, :description, :date, :location)
+    params.require(:step).permit(:name, :description, :location)
   end
 
   def set_step

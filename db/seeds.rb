@@ -154,7 +154,7 @@ DESCRIPTIONS = [
   trip.description = DESCRIPTIONS.sample
   trip.photo.attach(io: URI.open(TRIP_PHOTOS.sample), filename: "nes.png", content_type: "image/png")
   trip.user = User.all.sample
-  trip.save
+  trip.save!
 end
 
 Trip.all.first(5).each do |trip|

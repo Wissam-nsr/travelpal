@@ -8,11 +8,11 @@ class Moment < ApplicationRecord
   validates :date, presence: true
   validates :photo, attached: true
 
-  after_validation :geocode
+  after_validation :after_geocode
 
-  def geocode
-    results = Geocoder.search([self.latitude, self.longitude])
-    self.geocoder_object = results.first.data
+  def after_geocode
+      results = Geocoder.search([self.latitude, self.longitude])
+      self.geocoder_object = results.first.data
   end
 
   def nearest_city

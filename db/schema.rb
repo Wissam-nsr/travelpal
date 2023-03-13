@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_105852) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_114245) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_105852) do
     t.float "latitude"
     t.float "longitude"
     t.json "geocoder_object"
+    t.string "location"
     t.index ["trip_id"], name: "index_moments_on_trip_id"
   end
 
