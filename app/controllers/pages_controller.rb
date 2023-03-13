@@ -3,8 +3,8 @@ class PagesController < ApplicationController
 
   def home
     if user_signed_in?
-      radius = params[:radius].present? ? params[:radius].to_i : 150
-      @users = User.near([current_user.latitude,current_user.longitude],radius)
+      @radius = params[:radius].present? ? params[:radius].to_i : 150
+      @users = User.near([current_user.latitude,current_user.longitude], @radius)
       @markers = @users.geocoded.map do |user|
         {
           lat: user.latitude,
