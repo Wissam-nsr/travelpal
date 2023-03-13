@@ -19,27 +19,33 @@ a{
 
 .Feed-card-header{
 	padding: 0.3rem;
-  height: 0.2rem;
   border-radius: 40rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.1rem;
 }
 
 .Feed-card-location-image{
 	border-radius: 0.7rem;
 	width: 100%;
 	max-width: 60rem;
-	margin-top: 1rem;
+	margin-top: 0.5rem;
+  height: 20rem;
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1)
 }
 
 .Feed-card-user-image{
 	border-radius: 50%;
-	width: 4rem;
-	height: 4rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	vertical-align: middle;
+  box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.1);
 }
 
 .Feed-card-location{
 	float: right;
-	width: 11rem;
+	width: 14rem;
 	padding-top: 1.3rem;
 	text-align: right;
 	color: #000000;
@@ -50,6 +56,7 @@ a{
 	margin-left: 0.8rem;
 	font-weight:bold;
   color: #262626;
+  font-size: 1.1rem;
 }
 
 .Feed-card-content{
@@ -75,4 +82,8 @@ hr{
   margin-bottom: 0rem;
   padding-bottom: 0rem;
 
+}
+
+.feed-card-user-description{
+	width: 15rem;
 }
