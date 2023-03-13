@@ -1,0 +1,15 @@
+<div class="feed_top">
+  <h3><%= current_user.trips.last.moments.last.nearest_city %></h3>
+  <p> <strong><%= users.length - 1%> travelpals</strong> around you </p>
+    <div class="dropdown feed-top-dropdown">
+      <form method="get" action="/home">
+      <select name="radius" onChange="this.form.submit()">
+        <option value="50">50 km radius</option>
+        <option value="0">0 km radius</option>
+        <option value="5">5 km radius</option>
+        <option value="10">10 km radius</option>
+        <option value="25">25 km radius</option>
+      </select>
+      </form>
+    </div>
+</div>

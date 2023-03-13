@@ -1,0 +1,55 @@
+.screen {
+  width: 100vw;
+  padding-top: 1rem;
+  // background-image: asset_path("squared-paper-texture.jpg");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  h5 {
+    font-size: 1.6rem;
+  }
+}
+
+.flex-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1rem;
+  gap: 2rem;
+}
+
+.long-card {
+  width: 80%;
+  height: fit-content;
+  margin: 0.5rem auto;
+}
+
+.profile-card {
+  width: 100%;
+  height: fit-content;
+  padding-left: 2rem;
+  margin: 0 auto;
+}
+
+.feed {
+  width: 100%;
+  // display: grid;
+  // grid-template-columns: 1fr;
+  background: asset_url('squared-paper-texture.jpg');
+  background-size: contain;
+}
+
+// .mapboxgl-map {
+//   overflow: visible !important;
+// }
+
+// .mapboxgl-canvas {
+//   height: 100% !important;
+//   width: 100% !important;
+//   object-fit: cover;
+// }

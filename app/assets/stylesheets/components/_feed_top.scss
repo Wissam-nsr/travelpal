@@ -1,11 +1,16 @@
 .feed_top {
+display: flex;
 font-family: 'Hepta Slab';
 font-weight:normal;
 font-style:normal;
 width: auto;
-border-bottom: 0.1rem solid black;
+border-bottom: 0.1rem solid grey;
 height: 7.5rem;
 background-color: white;
 padding-top: 2.3rem;
 position: relative;
+margin-top: 10%;
+margin-left: 10%;
+margin-right: 10%;
+flex-direction: column
 }

@@ -4,11 +4,19 @@ class MomentsController < ApplicationController
   end
 
   def create
-    @trip = Trip.find(params[:trip_id])
+    if @trip = current_user.trips.last.present?
+      @trip = current_user.trips.last
+    else
+      redirect_to user_path(current_user)
+    end
     @moment = Moment.new(moment_params)
     @moment.trip = @trip
+    @moment.date = Date.today
+    results = Geocoder.search(@moment.location)
+    @moment.latitude = results.first.coordinates[0]
+    @moment.longitude = results.first.coordinates[1]
     if @moment.save
-      redirect_to user_path
+      redirect_to user_path(current_user)
     else
       render :new, status: :unprocessable_entity
     end
@@ -21,7 +29,7 @@ class MomentsController < ApplicationController
 private
 
   def moment_params
-    params.require(:moment).permit(:description, :date, :location, :photo)
+    params.require(:moment).permit(:description, :location, :photo)
   end
 
 end

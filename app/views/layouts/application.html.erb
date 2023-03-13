@@ -13,8 +13,8 @@
   </head>
 
   <body>
-  <%= render "shared/flashes" %>
-
+    <%= render "shared/flashes" %>
     <%= yield %>
+    <%= render "components/navbar_bottom", user: current_user %>
   </body>
 </html>
