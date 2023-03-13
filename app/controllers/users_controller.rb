@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @trips = @user.trips
-
+    if params[:trip].present?
+      @trip = Trip.find(params[:trip])
+    else
+      @trip = Trip.last
+    end
     @markers = []
     @user.trips.each do |trip|
       steps_list = []
@@ -13,6 +17,14 @@ class UsersController < ApplicationController
           }
       end
       @markers << steps_list
+    end
+
+    @current_markers = []
+    @trip.steps.order(:date).each do |step|
+      current_markers << {
+        lat: step.latitude,
+        lng: step.longitude,
+        }
     end
 
     @photos = []

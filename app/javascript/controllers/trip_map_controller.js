@@ -5,6 +5,7 @@ export default class extends Controller {
   static values = {
       apiKey: String,
       markers: Array,
+      currentTripMarkers: Array,
       photos: Array
     }
 
@@ -51,10 +52,8 @@ export default class extends Controller {
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach((trip) => {
-      trip.forEach((marker) => {
-        bounds.extend([ marker.lng, marker.lat ])
-      })
+    currentTripMarkersValue.forEach((marker) => {
+      bounds.extend([ marker.lng, marker.lat ])
     })
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 3 })
   }

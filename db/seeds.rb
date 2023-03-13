@@ -148,18 +148,26 @@ DESCRIPTIONS = [
   "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."
 ]
 
-15.times do
+14.times do
   trip = Trip.new
   trip.name = TRIPS.sample
   trip.description = DESCRIPTIONS.sample
   trip.photo.attach(io: URI.open(TRIP_PHOTOS.sample), filename: "nes.png", content_type: "image/png")
-  trip.user = User.all.sample
+end
+
+trips = Trip.all.map { |trip| trip }
+
+trips.first(3).each do |trip|
+  trip.user = User.first
   trip.save
 end
 
-Trip.all.first(5).each do |trip|
-  trip.ended = true
+trips.drop(3)
+i = 1
+trips.each do |trip|
+  trip.user = User.all[i]
   trip.save
+  i += 1
 end
 
 puts "Done ! (#{Trip.count} Trips)"

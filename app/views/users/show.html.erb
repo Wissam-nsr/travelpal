@@ -11,10 +11,14 @@
           <button class="nav-link" id="trip-map-tab" data-bs-toggle="tab" data-bs-target="#trip-map-tab-pane" type="button" role="tab" aria-controls="trip-map-tab-pane" aria-selected="false">Map</button>
         </li>
       </ul>
-  <div class="feed mt-5">
+  <div class="feed">
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="moment-tab-pane" role="tabpanel" aria-labelledby="moment-tab" tabindex="0">
-          <%= render 'moment_list', moments: @trips.all.last.moments %>
+          <% if @trip.moments.empty? %>
+            <h5>No photo yet !</h5>
+          <% else %>
+           <%= render 'moment_list', moments: @trip.moments %>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="trip-map-tab-pane" role="tabpanel" aria-labelledby="trip-map-tab" tabindex="0">
           <%= render 'shared/trip_map', markers: @markers, photos: @photos %>
