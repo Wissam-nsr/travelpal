@@ -6,12 +6,9 @@ class ChatroomsController < ApplicationController
   end
 
   def show
+    @chatrooms = Chatroom.all
     @chatroom = Chatroom.find(params[:id])
     @message = Message.new
-  end
-
-  def index
-    @chatrooms = Chatroom.all
   end
 
   def destroy
