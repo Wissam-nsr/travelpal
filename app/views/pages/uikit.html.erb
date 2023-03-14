@@ -98,7 +98,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" placeholder="Search..." style= "border-top-right-radius: 0.8rem; border-bottom-right-radius: 0.8rem;">
                 </div>
                 <ul class="list-unstyled chat-list mt-2 mb-0">
                     <li class="clearfix">
@@ -169,7 +169,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Enter text here...">
+                        <input type="text" class="form-control" placeholder="Enter text here..." style= "border-top-right-radius: 0.8rem; border-bottom-right-radius: 0.8rem;">
                     </div>
                 </div>
             </div>
@@ -196,11 +196,29 @@
   </li>
 
   <li>
-    <button class="Pic_of_day">
-
+  <div class="Add">
+    <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover" data-bs-html="true" data-bs-trigger="focus" id="example">
         <br>
         <span>Pic of the Day</span>
     </button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <script>
+      var popString = "";
+      popString = popString + "<a href='#' class='btn btn-primary' id ='new_step'>New Step</a> <a href='#' class='btn btn-primary' id ='new_moment'>New Moment</a>";
+
+      document.getElementById('example').setAttribute('data-bs-content', popString);
+
+      $(document).ready(function() {
+        $('[data-bs-toggle="popover"]').popover('show');
+      });
+
+    </script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    </div>
   </li>
 
   <li>
