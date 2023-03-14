@@ -1,1 +1,1 @@
-<%= cl_image_tag user.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered"%>
+<%= cl_image_tag user.avatar.key, transformation: [ width: 50, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered"%>
