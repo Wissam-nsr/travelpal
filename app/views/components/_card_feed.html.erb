@@ -1,13 +1,19 @@
-<div class="Feed-card">
-  <div class="Feed-card-header">
-    <div class = "feed-card-user-description">
-      <%= cl_image_tag user.avatar.key, class: "Feed-card-user-image"%>
-      <a class="Feed-card-user-name"> <%= user.username %> </a>
-    </div>
+<div class="slider-container">
+  <% user.trips.last.moments.each do |moment| %>
+  <div class="slide">
+    <div class="Feed-card">
+      <div class="Feed-card-header">
+        <div class = "feed-card-user-description">
+          <%= cl_image_tag moment.user.avatar.key, class: "Feed-card-user-image"%>
+          <a class="Feed-card-user-name"> <%= moment.user.username %> </a>
+        </div>
     <div class="Feed-card-location">
       <i class="fa-solid fa-location-dot"></i>
-        <strong><%= user.trips.last.moments.last.nearest_city %></strong>
+        <strong><%= moment.nearest_city %></strong>
     </div>
   </div>
-  <%= cl_image_tag user.trips.last.moments.last.photo.key, class: "Feed-card-location-image"%>
+    <%= cl_image_tag moment.photo.key, class: "Feed-card-location-image"%>
+  <% end %>
+  </div>
+  </div>
 </div>
