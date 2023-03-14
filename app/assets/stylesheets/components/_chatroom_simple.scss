@@ -256,3 +256,10 @@
   border: 0.1rem solid #ced4da;
   border-radius: 0.2rem;
 }
+
+.form-control {
+border-top-left-radius: 0.5rem;
+border-bottom-left-radius: 0.5rem;
+border-top-right-radius: 0.5rem;
+border-bottom-right-radius: 0.5rem;
+}
