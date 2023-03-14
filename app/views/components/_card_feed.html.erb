@@ -1,23 +1,25 @@
+<div class="Feed-card">
+  <div class="Feed-card-header">
+    <%= link_to user_path(user) do  %>
+    <div class = "feed-card-user-description">
+      <%= cl_image_tag user.avatar.key, transformation: [ width: 50, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "Feed-card-user-image"%>
+      <a class="Feed-card-user-name"> <%= user.username %> </a>
+    </div>
+    <% end %>
+  </div>
   <div class="swiper" data-controller="swiper">
     <div class="swiper-wrapper">
       <% user.trips.last.moments.each do |moment| %>
         <div class="swiper-slide">
-          <div class="Feed-card">
-            <div class="Feed-card-header">
-              <div class = "feed-card-user-description">
-                <%= link_to user_path(user) do %>
-                  <%= cl_image_tag moment.user.avatar.key, transformation: [ width: 50, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "Feed-card-user-image"%>
-                <% end %>
-                <a class="Feed-card-user-name"> <%= moment.user.username %> </a>
-              </div>
-              <div class="Feed-card-location">
-                <i class="fa-solid fa-location-dot"></i>
-                <strong><%= moment.nearest_city %></strong>
-              </div>
-            </div>
+          <div class="photo_feed">
             <%= cl_image_tag moment.photo.key, transformation: [ width: :auto, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "Feed-card-location-image"%>
+            <div class="Feed-card-location">
+              <i class="fa-solid fa-location-dot"></i>
+              <strong><%= moment.nearest_city %></strong>
+            </div>
           </div>
         </div>
       <% end %>
     </div>
   </div>
+</div>
