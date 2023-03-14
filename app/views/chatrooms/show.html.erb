@@ -1,0 +1,28 @@
+<div class="container chatroom">
+  <h1>Chat with <%= @chatroom.user_two.username %></h1>
+
+  <div class="messages">
+  <% if @chatroom.messages.any? %>
+      <div id="message-<%= message.id %>">
+    <% @chatroom.messages.each do |message| %>
+        <small>
+          <strong><%= message.user.username %></strong>
+          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+        </small>
+        <p><%= message.content %></p>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<%= simple_form_for [@chatroom, @message],
+  html: {class: "d-flex"} do |f|
+%>
+  <%= f.input :content,
+    label: false,
+    placeholder: "Message",
+    wrapper_html: {class: "flex-grow-1"}
+  %>
+  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+<% end %>
