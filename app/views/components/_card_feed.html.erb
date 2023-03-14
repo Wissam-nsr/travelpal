@@ -5,7 +5,9 @@
           <div class="Feed-card">
             <div class="Feed-card-header">
               <div class = "feed-card-user-description">
-                <%= cl_image_tag moment.user.avatar.key, transformation: [ width: 50, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "Feed-card-user-image"%>
+                <%= link_to user_path(user) do %>
+                  <%= cl_image_tag moment.user.avatar.key, transformation: [ width: 50, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "Feed-card-user-image"%>
+                <% end %>
                 <a class="Feed-card-user-name"> <%= moment.user.username %> </a>
               </div>
               <div class="Feed-card-location">

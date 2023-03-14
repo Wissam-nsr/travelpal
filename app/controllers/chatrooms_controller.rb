@@ -1,8 +1,10 @@
 class ChatroomsController < ApplicationController
 
   def create
-    @chatroom = Chatroom.new(params[:chatroom])
+    @chatroom = Chatroom.new(user_one: current_user, user_two:User.find(params[:user_two]))
     @chatroom.save
+    redirect_to chatroom_path(@chatroom)
+    # redirect_to chatrooms_path(chatroom_id: @chatroom)
   end
 
   def show
