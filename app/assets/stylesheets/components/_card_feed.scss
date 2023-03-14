@@ -20,14 +20,14 @@ a{
 .Feed-card-header{
 	padding: 0.3rem;
   border-radius: 40rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: baseline;
   margin-bottom: 0.1rem;
 }
 
 .Feed-card-location-image{
-	border-radius: 0.7rem;
+	border-radius: 0.2rem 0.2rem 0.7rem 0.7rem;
 	width: 100%;
 	max-width: 60rem;
 	margin-top: 0.5rem;

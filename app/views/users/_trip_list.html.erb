@@ -1,14 +1,18 @@
 <div class="long-card">
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between pb-2">
     <h5><%= user == current_user ? "My trips" : "#{user.username}'s trips"  %></h5>
     <%= link_to raw("<p><i class='fa-solid fa-location-dot fs-3'></i>Add a step</p>"), new_trip_step_path(user.trips.last) if user == current_user %>
   </div>
   <div class = icone-list>
-    <%= link_to raw("<i class='fa-regular fa-square-plus text-dark'></i>"), new_trip_path if user == current_user%>
+    <% if user == current_user  %>
+      <%= link_to new_trip_path do %>
+        <%= image_tag "add-item.png", class:"add-btn" %>
+      <% end %>
+    <% end %>
     <% unless trips.empty? %>
       <% trips.each do |trip| %>
         <%= link_to user_path(trip: trip) do %>
-          <%= cl_image_tag trip.photo.key, transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], alt: "Photo for the trip '#{trip.name}'", height: 80, width: 80 %>
+          <%= cl_image_tag trip.photo.key, transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], alt: "Photo for the trip '#{trip.name}'", class:"icone-pic" %>
         <% end %>
       <% end %>
     <% end %>

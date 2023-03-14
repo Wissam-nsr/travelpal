@@ -20,3 +20,37 @@
   align-items: center;
   text-align: center;
 }
+
+.show-tab {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 1.8rem;
+  border-bottom: 0.5px solid #464646;
+  color: #464646;
+  i {
+    padding-bottom: 1rem;
+  }
+  .active {
+    color: #000000;
+    border-bottom: 1px solid #000000;
+  }
+}
+
+.tab-links {
+  width: 100%;
+  display: flex;
+  // justify-content: space-between;
+}
+
+.nav-item {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+.add-btn {
+  height: 6.5rem;
+  width: 6.5rem;
+}
