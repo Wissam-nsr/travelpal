@@ -5,8 +5,8 @@
       <% location = location.split(',')[0] %>
       <h5><%= location unless location.nil? %></h5>
     <div class="photo-stack">
-      <%= cl_image_tag moment.photo.key, class: "photo" %>
-      <%= cl_image_tag moment.photo.key, class: "bg" %>
+      <%= cl_image_tag moment.photo.key, transformation: [ width: :auto, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "photo" %>
+      <%= cl_image_tag moment.photo.key, transformation: [ width: :auto, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "bg" %>
     </div>
   <% end %>
 </div>

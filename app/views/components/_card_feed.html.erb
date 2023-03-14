@@ -2,7 +2,7 @@
   <div class="Feed-card-header">
     <div class = "feed-card-user-description">
       <%= link_to user_path(user) do %>
-          <%= cl_image_tag user.avatar.key, class: "Feed-card-user-image"%>
+          <%= cl_image_tag user.avatar.key, transformation: [ width: 50, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "Feed-card-user-image"%>
           <a class="Feed-card-user-name"> <%= user.username %> </a>
       <% end %>
     </div>
@@ -11,5 +11,5 @@
         <strong><%= user.trips.last.moments.last.nearest_city %></strong>
     </div>
   </div>
-  <%= cl_image_tag user.trips.last.moments.last.photo.key, class: "Feed-card-location-image"%>
+  <%= cl_image_tag user.trips.last.moments.last.photo.key, transformation: [ width: :auto, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "Feed-card-location-image"%>
 </div>
