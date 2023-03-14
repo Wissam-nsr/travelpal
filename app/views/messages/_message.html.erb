@@ -1,0 +1,6 @@
+<div>
+  <% unless message.sender?(current_user) %>
+    <%= message.user.username %>
+  <% end %>
+    <p><%= message.content %></p>
+</div>
