@@ -8,7 +8,7 @@
     <% unless trips.empty? %>
       <% trips.each do |trip| %>
         <%= link_to user_path(trip: trip) do %>
-          <%= cl_image_tag trip.photo.key, alt: "Photo for the trip '#{trip.name}'", height: 80, width: 80 %>
+          <%= cl_image_tag trip.photo.key, transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], alt: "Photo for the trip '#{trip.name}'", height: 80, width: 80 %>
         <% end %>
       <% end %>
     <% end %>

@@ -1,5 +1,7 @@
+<!-- Slider main container -->
+
 <div>
-   <%= render partial: "components/feed_top", locals: {users: @users, current_user: @current_user, radius: @radius} %>
+   <%= render partial: "components/feed_top", locals: {users: @users, current_user: @current_user} %>
 </div>
 <div>
    <%= render partial: "pages/social", locals: {users: @users, current_user: @current_user} %>
