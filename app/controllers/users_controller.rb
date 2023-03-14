@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       if params[:trip].present?
         @trip = Trip.find(params[:trip])
       else
-        @trip = Trip.last
+        @trip = @user.trips.last
       end
       @markers = []
       @user.trips.each do |trip|

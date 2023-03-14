@@ -1,10 +1,10 @@
 <div class = "profile-card">
   <div class = "flex-left">
-    <%= cl_image_tag user.avatar.key, class: "user-image", transformation: 'avatar'%>
+    <%= cl_image_tag user.avatar.key, class: "user-image"%>
     <h5><strong><%= user.username %></strong></h5>
-    <%= link_to raw("<i class='fa-solid fa-right-from-bracket text-danger text-end fs-3'></i>"), destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <%= link_to raw("<i class='fa-solid fa-right-from-bracket text-danger text-end fs-3'></i>"), destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } if user == current_user %>
   </div>
 </div>
   <div class="long-card">
-    <p><%= user.description %></p>
+    <div class="txt"><p><%= user.description %></p></div>
   </div>

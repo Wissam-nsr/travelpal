@@ -1,1 +1,1 @@
-<%= cl_image_tag user.avatar.key, alt: "#{user.username} avatar", class: "avatar" %>
+<%= link_to raw("<%= cl_image_tag user.avatar.key, alt: '#{user.username} avatar', class: 'avatar' %>"), user_path(user) %>
