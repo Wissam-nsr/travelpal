@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  :recoverable, :rememberable, :validatable
 
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :trips, dependent: :destroy
   has_many :steps, through: :trips
   has_many :moments, through: :trips
+  has_many :chatrooms
+  has_many :messages, through: :chatroom
   validates :username, uniqueness: true, length: { minimum: 5, maximum: 20 }
 
   def after_geocode
@@ -37,8 +39,5 @@ class User < ApplicationRecord
   def last_trip_cities
     last_trip_moments.map {|moment| moment.nearest_city }
   end
-
-# has_many :chatrooms #dependent: :destroy
-# has_many :messages, through: :chatroom, dependent: :destroy
 
 end

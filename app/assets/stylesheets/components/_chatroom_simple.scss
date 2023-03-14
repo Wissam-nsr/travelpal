@@ -8,6 +8,7 @@
   position: relative;
   width: 100%;
 }
+
 .chat-app .people-list {
   width: 11.9rem;
   position: absolute;
@@ -138,7 +139,7 @@
 }
 
 .chat .chat-history .my-message {
-  background: #efefef
+  background: #efefef;
 }
 
 .chat .chat-history .my-message:after {
@@ -254,4 +255,11 @@
   background-color: #e9ecef;
   border: 0.1rem solid #ced4da;
   border-radius: 0.2rem;
+}
+
+.form-control {
+border-top-left-radius: 0.5rem;
+border-bottom-left-radius: 0.5rem;
+border-top-right-radius: 0.5rem;
+border-bottom-right-radius: 0.5rem;
 }

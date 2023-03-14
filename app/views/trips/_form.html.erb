@@ -1,6 +1,8 @@
+<div class='container-stef'>
 <%= simple_form_for trip do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :photo, as: :file %>
-  <%= f.button :submit %>
+  <%= f.input :name, input_html: { style:'background: none' } %>
+  <%= f.input :description, input_html: { style:'background: none' } %>
+  <%= f.input :photo, as: :file%>
+  <%= f.button :submit, class: "btn btn-secondary"  %>
 <% end %>
+</div>
