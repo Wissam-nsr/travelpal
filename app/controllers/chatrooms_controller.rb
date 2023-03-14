@@ -2,6 +2,7 @@ class ChatroomsController < ApplicationController
 
   def create
     @chatroom = Chatroom.new(params[:chatroom])
+    @chatroom.save
   end
 
   def show

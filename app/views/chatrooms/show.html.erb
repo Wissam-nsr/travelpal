@@ -1,9 +1,9 @@
 <div class="container chatroom">
-  <h1>Chat with <%= @chatroom.user_two.username %></h1>
+  <h1>Chat between <%= @chatroom.user_one.username %> and <%= @chatroom.user_two.username %></h1>
 
   <div class="messages">
   <% if @chatroom.messages.any? %>
-      <div id="message-<%= message.id %>">
+      <div id="message-<%= @message.id %>">
     <% @chatroom.messages.each do |message| %>
         <small>
           <strong><%= message.user.username %></strong>
