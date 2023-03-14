@@ -45,11 +45,19 @@ a{
 
 .Feed-card-location{
 	float: right;
-	width: 14rem;
-	padding-top: 1.3rem;
+	width: 100%;
+	padding: 1rem;
 	text-align: right;
-	color: #000000;
-
+	color: #94BCAE;
+  text-shadow: 0.5px 0 #000000, -0.5px 0 #000000, 0 0.5px #000000, 0 -0.5px #000000,
+               0.5px 0.5px #000000, -0.5px -0.5px #000000, 0.5px -0.5px #000000, -0.5px 0.5px #000000;
+  display: flex;
+  align-items:flex-end;
+  justify-content: flex-end;
+  i {
+    font-size: 1.2rem;
+    padding-right: 2px;
+  }
 }
 
 .Feed-card-user-name{
@@ -86,4 +94,12 @@ hr{
 
 .feed-card-user-description{
 	width: 15rem;
+}
+
+.photo_feed {
+  display: grid;
+  .Feed-card-location, img {
+    grid-column: 1;
+    grid-row: 1;
+  }
 }
