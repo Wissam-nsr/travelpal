@@ -1,7 +1,6 @@
-<i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-<% unless message.sender?(current_user) %>
-  <%= message.user.username %>
-<% end %>
-<div class= "<%= message.sender?(current_user) ? 'my-message' : 'other-message'%>">
-  <p><%= message.content %></p>
+<div>
+  <% unless message.sender?(current_user) %>
+    <%= message.user.username %>
+  <% end %>
+    <p><%= message.content %></p>
 </div>
