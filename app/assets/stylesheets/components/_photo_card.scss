@@ -19,7 +19,7 @@
     grid-row: 1;
     grid-column: 1;
     height: 20rem;
-    width: 25rem;
+    width: 30rem;
     object-fit: cover;
   }
 
@@ -46,8 +46,8 @@
 
 .bg {
   filter: blur(1px) brightness(0.7) opacity(50%);
-  height: 15rem;
-  width: 20rem;
+  // height: 15rem;
+  // width: 30rem;
   // transform: rotate(-6deg);
   z-index: 0;
   // position: absolute;

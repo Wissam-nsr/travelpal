@@ -1,7 +1,7 @@
 class MomentsController < ApplicationController
   def new
-      @moment = Moment.new
-    end
+    @moment = Moment.new
+    @moment.trip = current_user.trips.last
   end
 
   def create

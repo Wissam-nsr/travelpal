@@ -1,11 +1,11 @@
 .screen {
-  width: 100vw;
+  width: 100%;
+  min-height: calc(100% - 52px);
   padding-top: 1rem;
   // background-image: asset_path("squared-paper-texture.jpg");
   display: flex;
   flex-direction: column;
   align-items: center;
-
   p {
     font-size: 1.2rem;
   }
@@ -28,7 +28,7 @@
   height: fit-content;
   margin: 0.5rem auto;
   .txt {
-    height: 6rem;
+    padding-top: 1rem;
     display: flex;
     align-items:center;
   }
@@ -46,7 +46,6 @@
   // display: grid;
   // grid-template-columns: 1fr;
   background: asset_url('squared-paper-texture.jpg');
-  background-color: rgba(0, 0, 0, 0.6);
   background-size: contain;
   position: relative;
   &::before {
