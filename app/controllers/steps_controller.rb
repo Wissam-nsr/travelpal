@@ -11,7 +11,7 @@ before_action :set_step, only: [:edit, :update, :destroy]
   end
 
   def new
-    @step = Step.new
+      @step = Step.new
   end
 
   def create
@@ -26,7 +26,8 @@ before_action :set_step, only: [:edit, :update, :destroy]
     if @step.save
       redirect_to user_path(current_user)
     else
-      render :new, status: :unprocessable_entity
+      flash.now[:notice] = 'You need to create a trip'
+      redirect_to user_path
     end
   end
 

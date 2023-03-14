@@ -2,7 +2,7 @@
 <div class="card-grid">
   <% users.each do |user| %>
     <% unless user.id == current_user.id %>
-      <% if user.trips.last.moments.any? %>
+      <% if user.trips.any? && user.trips&.last&.moments.any? %>
        <%= render partial: "components/card_feed", locals: {user: user} %>
       <% end %>
     <% end %>

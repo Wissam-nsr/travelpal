@@ -1,6 +1,8 @@
 <div class="feed_top">
-  <h3><%= current_user.geocoder_object["address"]["city_district"] %></h3>
-  <p> <strong><%= users.length - 1%> travelpals</strong> around you </p>
+  <% unless current_user.location.nil? %>
+    <h3><%= current_user.geocoder_object["address"]["city_district"] %></h3>
+  <% end %>
+  <p> <strong><%= users.length - 1 %> travelpals</strong> around you </p>
     <div class="dropdown feed-top-dropdown">
       <form method="get" action="/">
       <select name="radius" onChange="this.form.submit()">

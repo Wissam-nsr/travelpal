@@ -2,6 +2,7 @@ class Moment < ApplicationRecord
   has_one_attached :photo
 
   belongs_to :trip
+  has_one :user, through: :trip
 
   validates :latitude, presence: true
   validates :longitude, presence: true
