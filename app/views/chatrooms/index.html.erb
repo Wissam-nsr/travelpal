@@ -7,7 +7,7 @@
   </ul>
 </div>
 
-<% unless @my_chatrooms.empty? %>
+<% if @chatroom.present? %>
 
   <div class="container chatroom"
     data-controller="chatroom-subscription"
@@ -40,4 +40,3 @@
   <% end %>
 
 <% end %>
-  
