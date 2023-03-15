@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  before_action :set_moment, except: :landing
+  before_action :set_moment
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_moment
-    @trip = current_user&.trips&.last
+    @trip = current_user&.trips&.last if current_user
     @moment = Moment.new
     @moment&.trip = @trip if current_user
   end
