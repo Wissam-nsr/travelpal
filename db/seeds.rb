@@ -29,11 +29,13 @@ demo_user = User.new
 demo_user.email = "stephan@demo.com"
 demo_user.password = "123456"
 demo_user.username = "Stephan_Supertramp"
-demo_user.description = "Backpacking alone in the wild Australia after a trip in Japan. Looking fro new friends and adventures"
-demo_user.location = "380 Roma St, Brisbane City QLD 4000, Australie"
-demo_user.avatar.attach(io: URI.open("https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60"), filename: "nes.png", content_type: "image/png")
+demo_user.description = "Traveling through Europe for a year. Looking fro new friends and adventures"
+demo_user.avatar.attach(io: URI.open("https://images.unsplash.com/photo-1547699326-3d895d9acd30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"), filename: "nes.png", content_type: "image/png")
+demo_user.latitude = "48.8590453"
+demo_user.longitude = "2.2933084"
 demo_user.save!
 
+USER_NAMES = ["Agathe", "Hugo_en", "Laura", "Matthew", "Roberto", "Nicolas", "Alexander", "Paul_from_sweden", "Nadia", "Sydney"]
 
 # 10 other users:
 BIOS = [
@@ -77,14 +79,18 @@ AVATARS_URL = [
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60"
 ]
 
-3.times do
+i = 0
+10.times do
   user = User.new
   user.email = Faker::Internet.email
   user.password = "123456"
-  user.username = Faker::Internet.username(specifier: 5...20)
+  user.username = USER_NAMES[i]
   user.description = BIOS.sample
-  user.avatar.attach(io: URI.open(AVATARS_URL.sample), filename: "nes.png", content_type: "image/png")
+  avatar = AVATARS_URL.sample
+  user.avatar.attach(io: URI.open(avatar), filename: "nes.png", content_type: "image/png")
+  AVATARS_URL.delete(avatar)
   user.save
+  i += 1
 end
 
 travelers = User.all.drop(1)
@@ -118,51 +124,121 @@ puts "Done ! (#{User.count} Users)"
 puts "Demo user: stephan@demo.com, pwd: 123456"
 
 # TRIPS
-puts "Creating 14 Trips"
+puts "Creating 13 Trips: 1 for each user  & 2 former trips for the demo user"
 puts "..."
 
+#Two previous trips for the demo user
+
+# First trip in Ireland
+trip = Trip.new
+trip.user = User.all.order(:id)[1]
+trip.name = "Ireland 2022"
+trip.description = "Campervan roadtrip through Ireland"
+trip.photo.attach(io: URI.open("https://images.unsplash.com/photo-1630784033384-a912e9b82090?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGlyZWxhbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60"), filename: "nes.png", content_type: "image/png")
+trip.save
+
+locations=["Dublin", "Galway", "Limerik", "Killarney National Park", "Cork"]
+date = Date.new(2022,04,01)
+
+locations.each do |location|
+  step = Step.new
+  step.trip = Trip.all.last
+  step.location = location
+  step.name = location
+  step.description = Faker::Lorem.sentence
+  step.date = date
+  step.save
+  date += 4
+end
+
+Trip.all.last.steps.each do |step|
+  rand(2..4).times do
+    moment = Moment.new
+    moment.trip = step.trip
+    moment.description = Faker::Lorem.sentence
+    location = random_spot([step.latitude, step.longitude], 10)
+    moment.latitude = location[0]
+    moment.longitude = location[1]
+    moment.photo.attach(io: URI.open("https://source.unsplash.com/random/?ireland-tourism"), filename: "nes.png", content_type: "image/png")
+    moment.date = Faker::Date.between(from: step.date, to: step.date + 3)
+    moment.save
+  end
+end
+
+# Second trip in Iceland
+trip = Trip.new
+trip.user = User.all.order(:id)[1]
+trip.name = "Iceland 2021"
+trip.description = "South of Iceland during summer"
+trip.photo.attach(io: URI.open("https://images.unsplash.com/photo-1548191656-893904d26e3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGljZWxhbmQlMjBtYXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"), filename: "nes.png", content_type: "image/png")
+trip.save
+
+locations=["Reykjavík", "Reynisfjara Beach", "Skaftafell", "Diamond Beach"]
+date = Date.new(2022,04,01)
+i = 0
+
+locations.each do |location|
+  step = Step.new
+  step.trip = Trip.all.last
+  step.location = location
+  step.name = location
+  step.description = Faker::Lorem.sentence
+  step.date = date
+  step.save
+  date += 2
+end
+
+Trip.all.last.steps.each do |step|
+  rand(2..4).times do
+    moment = Moment.new
+    moment.trip = step.trip
+    moment.description = Faker::Lorem.sentence
+    location = random_spot([step.latitude, step.longitude], 10)
+    moment.latitude = location[0]
+    moment.longitude = location[1]
+    moment.photo.attach(io: URI.open("https://source.unsplash.com/random/?iceland-tourism"), filename: "nes.png", content_type: "image/png")
+    moment.date = Faker::Date.between(from: step.date, to: step.date + 1)
+    moment.save
+  end
+end
+
+#One current trip for each users
 TRIPS = [
-  "Great Ocean Road",
-  "West Coast",
-  "Est Coast",
-  "Northen Territories",
-  "Outback"
+  "Europe by train",
+  "France discovery",
+  "Western Europe",
+  "European capitals"
 ]
 
 TRIP_PHOTOS = [
-  "https://images.unsplash.com/photo-1519709063170-124e1d4a8e24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODd8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1596037560218-72a6812a6574?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODh8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1560424730-ec1c186a7573?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1592930506084-71a406f242a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1446768500601-ac47e5ec3719?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=600",
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1553076446-829d6dba2f0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1532339142463-fd0a8979791a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dHJpcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1573097637683-58e6462d2902?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHRyaXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJpcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  "https://images.unsplash.com/photo-1670002577810-25df64be0161?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGV1cm9wZSUyMGJ5JTIwdHJhaW58ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZnJhbmNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1589262804704-c5aa9e6def89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZXVyb3BlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60",
+  "https://images.unsplash.com/photo-1454386608169-1c3b4edc1df8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
 ]
 
 DESCRIPTIONS = [
-  "One of the country's most famous road trips stretches along its southern coast from Torquay to Allansford in Victoria.",
-  "It's a wind-the-windows-down kind of road trip that embraces Australia's coastal beauty and laid-back vibes. Plus, it passes what many would argue is the country's most iconic road trip pit stop: the Big Banana in Coffs Harbour.",
-  "Just under 1200 kilometres, this west coast drive takes you from Perth to Exmouth along WA's stunning Coral Coast via Cervantes, Geraldton, Monkey Mia and Carnarvon.",
-  "Take in the Top End with this one-day trip that runs through Litchfield National Park. From the city you'll head bush, tracing your way through Katherine and Kakadu before you meet Litchfield; a strip overflowing with waterfalls (excuse the pun), swimming holes, and incredible rock formations.",
-  "The central Australian outback is a place of transformation. Ancient ochre landscapes, dynamic cultures and bright, starry skies create an energy unique to Australia's red heart - difficult to put into words, but impossible not to feel."
+  "Beautiful views, comfortable train cars, the bustle of busy platforms, and the thrill of a new adventure: Europe by train!",
+  "Check list: eat a baguette and a croissant, taste the wine, see the Eiffel Tower, experience the french food!",
+  "Road trip to western Europe, wanting to discover Portugal, France, Spain, UK and Italy",
+  "Culture discovery in europeans capital cities"
 ]
 
-2.times do
+11.times do
   trip = Trip.new
-  trip.name = TRIPS.sample
-  trip.description = DESCRIPTIONS.sample
-  trip.photo.attach(io: URI.open(TRIP_PHOTOS.sample), filename: "nes.png", content_type: "image/png")
+  name = TRIPS.sample
+  index = TRIPS.index(name)
+  trip.name = name
+  trip.description = DESCRIPTIONS[index]
+  trip.photo.attach(io: URI.open(TRIP_PHOTOS[index]), filename: "nes.png", content_type: "image/png")
   trip.user = User.all.first
   trip.save
 end
 
-trips = Trip.all.map { |trip| trip }
+trips = Trip.all.order(:id).map { |trip| trip }
 
-trips.drop(3)
-i = 1
+trips = trips.drop(2)
+i = 0
 
 trips.each do |trip|
   trip.user = User.all[i]
@@ -173,86 +249,90 @@ end
 puts "Done ! (#{Trip.count} Trips)"
 
 # STEPS
-puts "Creating between 3 and 6 Steps per trips"
+puts "Creating between 2 and 5 Steps per trips"
 puts "..."
 
 STEPS = {
-  "Great Ocean Road" => [
-    "Adelaide",
-    "Barossa Valley",
-    "Cape Jervis",
-    "Victor Harbor",
-    "Robe, South Australia",
-    "Mount Gambier",
-    "Port Fairy",
-    "Port Campbell National Park",
-    "Cape Otway",
-    "Torquay Victoria",
-    "Geelong",
-    "Melbourne"
+  "Europe by train" => [
+    "Bucharest",
+    "Budapest",
+    "Vienna",
+    "Zagreb",
+    "Ljubljana",
+    "Florence",
+    "Milan",
+    "Prague",
+    "Munich",
+    "Berlin",
+    "Amsterdam",
+    "Lille",
+    "Paris",
+    "Bordeaux",
+    "Barcelona",
+    "Madrid",
+    "Lisbon",
+    "London"
   ],
-  "West Coast" => [
-    "Broome, Western Australia",
-    "Port Headland",
-    "Karratha",
-    "Exmouth, Western Australia" ,
-    "Coral Bay",
-    "Carnarvon" ,
-    "Monkey Mia" ,
-    "Kalbarri" ,
-    "Geraldton",
-    "Jurien Bay",
-    "Perth"
+  "France discovery" => [
+    "Marseille",
+    "Toulouse",
+    "Bordeaux",
+    "Nantes",
+    "Rennes",
+    "Tours",
+    "Orléans",
+    "Lyon",
+    "Strasbourg",
+    "Reims",
+    "Lille"
   ],
-  "Est Coast" => [
-    "Cape Tribulation, Queensland",
-    "Cairns",
-    "Airlie Beach",
-    "Rockhampton, Queensland",
-    "Fraser Island",
-    "Noosa",
-    "Brisbane",
-    "Gold Coast",
-    "Byron Bay",
-    "Coffs Harbour",
-    "Port Macquarie",
-    "Hunter Valley",
-    "Sydney"
+  "Western Europe" => [
+    "Florence",
+    "Milan",
+    "Munich",
+    "Berlin",
+    "Amsterdam",
+    "London",
+    "Paris",
+    "Bordeaux",
+    "Barcelona",
+    "Valencia",
+    "Madrid",
+    "Seville",
+    "Lisbon",
+    "Porto"
   ],
-  "Northen Territories" => [
-    "Darwin",
-    "Jabiru",
-    "Ubirr",
-    "Cooinda",
-    "Jim Jim Falls",
-    "Gunlom",
-    "Pine Creek NT",
-    "Katherine",
-    "Nitmiluk National Park"
-  ],
-  "Outback" => [
-    "Darwin",
-    "Kakadu National Park",
-    "Nitmiluk National Park",
-    "Alice Springs",
-    "Uluru-Kata Tjuta National Park",
-    "Coober Pedy",
-    "Flinders Ranges",
-    "Barossa Valley",
-    "Victor Harbor",
-    "Adelaide"
-  ] }
+  "European capitals" => [
+    "Bucharest",
+    "Budapest",
+    "Vienna",
+    "Zagreb",
+    "Ljubljana",
+    "Rome",
+    "Prague",
+    "Berlin",
+    "Amsterdam",
+    "London",
+    "Paris",
+    "Barcelona",
+    "Madrid",
+    "Lisbon"
+  ]
+  }
 
-Trip.all.each do |trip|
+trips.each do |trip|
   step_list = STEPS[trip.name].map { |step| step }
+  trip_date = Faker::Date.between(from: 60.days.ago, to: Date.today)
+
   rand(2..5).times do
     step = Step.new
     step.trip = trip
     step.location = step_list.sample
     step.name = step.location
-    step_list.delete(step.location)
+    index = STEPS[trip.name].index(step.location)
     step.description = Faker::Lorem.sentence
-    step.date = Faker::Date.between(from: 60.days.ago, to: Date.today)
+    step.date = trip_date + index
+    step_list.delete(step.location)
     step.save
   end
 end
@@ -260,22 +340,36 @@ end
 puts "Done ! (#{Step.count} Steps)"
 
 # MOMENTS
-puts "Creating between 2 and 5 Moments per Steps"
+puts "Creating between 1 and 3 Moments per Steps"
 puts "..."
 
-Step.all.each_with_index do |step, index|
-  rand(2..3).times do
+QUERIES = [
+  "europe-tourism",
+  "france-tourism",
+  "europe-tourism",
+  "europe-capitals"
+]
+
+step_list = Step.all.map { |step| step }
+step_list.reject!{|step| step.trip == Trip.all.order(:id)[0] || step.trip == Trip.all.order(:id)[1]}
+
+
+step_list.each_with_index do |step, index|
+
+  rand(1..3).times do
     moment = Moment.new
+    trip_index = TRIPS.index(step.trip.name)
+    query = QUERIES[trip_index]
     moment.trip = step.trip
     moment.description = Faker::Lorem.sentence
-    location = random_spot([step.latitude, step.longitude], 20)
+    location = random_spot([step.latitude, step.longitude], 10)
     moment.latitude = location[0]
     moment.longitude = location[1]
-    moment.photo.attach(io: URI.open("https://source.unsplash.com/random/?australian-landscape"), filename: "nes.png", content_type: "image/png")
-    moment.date = step.date = Faker::Date.between(from: step.date - 2, to: step.date + 2)
+    moment.photo.attach(io: URI.open("https://source.unsplash.com/random/?#{query}"), filename: "nes.png", content_type: "image/png")
+    moment.date = Faker::Date.between(from: step.date - 2, to: step.date + 2)
     moment.save
   end
-  puts "#{index + 1} / #{Step.count} steps"
+  puts "#{index + 1} / #{step_list.count} steps"
   puts "..."
 end
 

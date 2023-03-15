@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_13_114245) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_112844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,7 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_114245) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "description"
-    t.string "location"
+    t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.json "geocoder_object"

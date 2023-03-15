@@ -7,6 +7,10 @@ margin-left: auto;
 margin-right: auto;") %>
 <br>
 <br>
-<%= button_to "Sign up", new_user_registration_path, :class => "button", :method => :get %>
-<br>
-<%= button_to "Log In", new_user_session_path, :class => "button_log_in", :method => :get %>
+<% if user_signed_in? %>
+  <%= button_to "Let's go! 🚀", user_path(current_user), :class => "button_log_in", :method => :patch %>
+<% else %>
+  <%= button_to "Sign up", new_user_registration_path, :class => "button", :method => :get %>
+  <br>
+  <%= button_to "Log In", new_user_session_path, :class => "button_log_in", :method => :get %>
+<% end %>
