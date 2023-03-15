@@ -14,9 +14,65 @@
 }
 
 .sender-style {
-  background-color: lightgreen;
+  background-color: #a6cbbe;
+  color: black
 }
 
 .receiver-style {
-  background-color: lightpink;
+  background-color: darkgrey;
+  color: black
 }
+
+.container-chatroom {
+  height: calc(100vh - 135px);
+  padding-bottom: 40px;
+  overflow: scroll;
+  margin-top: 2rem;
+  padding: 3rem;
+  background: asset_url('squared-paper-texture.jpg');
+  background-size: contain;
+}
+
+.container-chatrooms {
+  padding: 5rem;
+  background: asset_url('squared-paper-texture.jpg');
+  background-size: contain;
+}
+
+.chatroom-style {
+  border-bottom: solid darkgray;
+}
+
+.user-description {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid lightgray;
+  padding: 1rem;
+  align-items: center;
+}
+
+.user-banner {
+  width: 30%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.user-last-message {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+}
+
+.message-form {
+padding: 0rem 3rem;
+}
+
+.chatroom-banner {
+  display: flex;
+  gap: 1rem;
+  align-items:flex-end;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: light lightgray
+  }

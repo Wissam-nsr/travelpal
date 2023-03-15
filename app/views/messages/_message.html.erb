@@ -1,6 +1,11 @@
-<div>
+<div id="message-<%= message.id %>">
   <% unless message.sender?(current_user) %>
+   <div style= "font-size: 1.2rem">
     <%= message.user.username %>
+   </div>
   <% end %>
-    <p><%= message.content %></p>
+    <small>
+      <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+    </small>
+   <p> <strong><%= message.content %> </strong></p>
 </div>

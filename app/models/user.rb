@@ -45,4 +45,12 @@ class User < ApplicationRecord
     last_trip_moments.map {|moment| moment.nearest_city }
   end
 
+  def chatroom_with(user)
+    Chatroom.find_by(user_one: [self, user], user_two: [self, user])
+  end
+
+  def chatrooms
+    Chatroom.where(user_one:User.first).or(Chatroom.where(user_two:User.first))
+  end
+
 end

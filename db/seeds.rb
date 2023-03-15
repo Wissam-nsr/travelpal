@@ -13,6 +13,8 @@ def random_spot(origin_coordinates, km_distance)
 end
 
 # RESET DATA_BASE
+Message.destroy_all
+Chatroom.destroy_all
 Moment.destroy_all
 Step.destroy_all
 Trip.destroy_all
@@ -372,5 +374,40 @@ step_list.each_with_index do |step, index|
 end
 
 puts "Done ! (#{Moment.count} Moments)"
+
+# CHATROOMS
+puts "Creating between 2 and 3 Chatrooms per user"
+puts "..."
+
+User.all.each_with_index do |user, index|
+  rand(2..3).times do
+    chatroom = Chatroom.new
+    chatroom.user_one = user
+    chatroom.user_two = User.where.not(username: user.username).sample
+    chatroom.save
+  end
+  puts "#{index + 1} / #{User.count} users"
+  puts "..."
+end
+
+puts "Done ! (#{Chatroom.count} Chatrooms)"
+
+# MESSAGES
+puts "Creating between 3 and 6 Messages per user"
+puts "..."
+
+Chatroom.all.each_with_index do |chatroom, index|
+  rand(3..6).times do
+    message = Message.new
+    message.content = BIOS.sample
+    message.user = [chatroom.user_one, chatroom.user_two].sample
+    message.chatroom = chatroom
+    message.save
+  end
+  puts "#{index + 1} / #{Chatroom.count} chatrooms"
+  puts "..."
+end
+
+puts "Done ! (#{Message.count} Messages)"
 
 puts "------ SEED DONE 🚀 ------"

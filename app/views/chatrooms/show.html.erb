@@ -1,18 +1,11 @@
-<div class="d-flex p-3">
-    <% @my_chatrooms.each do |chatroom| %>
-      <%= link_to chatroom_path(chatroom) do %>
-      <%= cl_image_tag chatroom.user_two.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered m-2" %>
-      <% end %>
-    <% end %>
-  </ul>
-</div>
-
-<% unless @my_chatrooms.empty? %>
-
-  <div class="container chatroom"
+ <div class="container-chatroom"
     data-controller="chatroom-subscription"
-    data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
-    <h1>Chat with <%= @chatroom.user_two.username %></h1>
+    data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+    data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
+    <div class= "chatroom-banner">
+      <%= cl_image_tag @chatroom.user_two == current_user ? @chatroom.user_one.avatar.key : @chatroom.user_two.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar-bordered" %>
+      <h3><%= @other_user.username %></h3>
+    </div>
     <div class="messages" data-chatroom-subscription-target="messages">
       <% if @chatroom.messages.any? %>
           <div id="message-<%= @message.id %>">
@@ -28,6 +21,7 @@
     </div>
   </div>
 
+<div class ="message-form">
   <%= simple_form_for [@chatroom, @message],
     html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
   %>
@@ -36,9 +30,6 @@
       placeholder: "Message",
       wrapper_html: {class: "flex-grow-1"}
     %>
-    <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+    <%= f.submit%>
   <% end %>
-
-<% end %>
-
-<%= render "components/chatroom_simple" %>
+</div>
