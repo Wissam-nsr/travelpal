@@ -1,6 +1,9 @@
-<%= simple_form_for [@trip, @moment], url: trip_moments_path do |f| %>
-  <%= f.input :description, input_html: { style:'background: none' } %>
-  <%= f.input :location, input_html: { style:'background: none' } %>
+<div class='container-stef'>
+<%= simple_form_for [@moment], url: new_moment_path do |f| %>
+  <%= f.input :description, input_html: { style:'background: white' } %>
+  <%= f.input :location, input_html: { style:'background: white' } %>
   <%= f.input :photo, as: :file %>
-  <%= f.button :submit, class: "btn btn-secondary" %>
+  <br>
+  <%= f.button :submit, class: "btn btn-dark" %>
 <% end %>
+</div>

@@ -1,57 +1,69 @@
-<ul class="navbar-buttons">
-	<li> <%= link_to root_path do %>
-    <button class="Feed">
-      <i class="fa-solid fa-house"></i>
-      <br>
-      <span>Feed</span>
-    </button>
-    <% end %>
-  </li>
-
-  <li> <%= link_to map_path do %>
-    <button class="Around">
-        <i class="fa-solid fa-location-dot"></i>
+<div class="wrapper"
+     data-controller="toggle-element">
+  <ul class="navbar-buttons">
+    <li> <%= link_to root_path do %>
+      <button class="Feed">
+        <i class="fa-solid fa-house"></i>
         <br>
-        <span>Around</span>
-    </button>
-    <% end %>
-  </li>
-
-<% if current_user.trips.any? %>
-    <li> <%= link_to new_trip_moment_path(user.trips.last) do %>
-      <button class="Pic_of_day">
-          <br>
-          <span>Pic of the Day</span>
+        <span>Feed</span>
       </button>
-    <% end %>
-  </li>
-  <% else %>
-  <li> <%= link_to user_path(user) do %>
-      <button class="Pic_of_day">
-          <br>
-          <span>Pic of the Day</span>
-      </button>
-    <% end %>
-  </li>
-<% end %>
+      <% end %>
+    </li>
 
-  <li> <%= link_to '#' do %>
-      <button class="Chats">
-          <i class="fa-solid fa-comments"></i>
+    <li> <%= link_to map_path do %>
+      <button class="Around">
+          <i class="fa-solid fa-location-dot"></i>
           <br>
-          <span>Chats</span>
+          <span>Around</span>
       </button>
-    <% end %>
-  </li>
+      <% end %>
+    </li>
 
-<% if user %>
-  <li> <%= link_to user_path(user) do %>
-    <button class="Profile">
-        <i class="fa-solid fa-user"></i>
-        <br>
-        <span>Profile</span>
-    </button>
-    <% end %>
+  <% if current_user.trips.any? %>
+      <li>
+        <button class="Pic_of_day" data-action="click->toggle-element#toggle">
+            <br>
+            <span>Pic of the Day</span>
+        </button>
+
+    </li>
+    <% else %>
+    <li> <%= link_to user_path(user) do %>
+        <button class="Pic_of_day">
+            <br>
+            <span>Pic of the Day</span>
+        </button>
+      <% end %>
+    </li>
   <% end %>
 
-</ul>
+    <li> <%= link_to '#' do %>
+        <button class="Chats">
+            <i class="fa-solid fa-comments"></i>
+            <br>
+            <span>Chats</span>
+        </button>
+      <% end %>
+    </li>
+
+  <% if user %>
+    <li> <%= link_to user_path(user) do %>
+      <button class="Profile">
+          <i class="fa-solid fa-user"></i>
+          
+          <br>
+          <span>Profile</span>
+      </button>
+      <% end %>
+    <% end %>
+
+  </ul>
+
+
+  <% if current_user %>
+    <div class="sliding-form" data-toggle-element-target="element">
+      <%= render "moments/form", moment: @moment %>
+    </div>
+  <% end %>
+
+</div>

@@ -4,4 +4,19 @@
   justify-content: center;
   align-items: center;
   height: 92vh;
+  font-weight: bold;
+}
+
+.sliding-form {
+  background: #94BCAE;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0vh;
+  z-index: 1;
+  transition: all ease 0.7s;
+  &.active {
+    height: 100vh;
+  }
 }

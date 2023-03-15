@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :trips, only: [:new, :create, :update, :destroy] do
-    resources :moments, only: [:new, :create]
     resources :steps, only: [:index, :new, :create]
   end
+
+  resources :moments, only: [:new, :create]
 
   resources :chatrooms, only: [:show, :create, :destroy] do
     resources :messages, only: [:create]
