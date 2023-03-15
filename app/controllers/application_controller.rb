@@ -5,17 +5,17 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:avatar, :username, :location])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:avatar, :username, :address])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :username, :location])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :username, :address])
   end
 
   private
 
   def set_moment
+    @trip = current_user&.trips&.last if current_user
     @moment = Moment.new
-    @trip = current_user.trips.last
-    @moment.trip = current_user.trips.last if current_user
+    @moment&.trip = @trip if current_user
   end
 end

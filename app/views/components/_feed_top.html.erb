@@ -1,5 +1,5 @@
 <div class="feed_top">
-  <% unless current_user.location.nil? %>
+  <% unless current_user.address.nil? %>
     <h3><%= current_user.geocoder_object["address"]["city_district"] %></h3>
   <% end %>
   <p> <strong><%= users.length - 1 %> travelpals</strong> around you </p>

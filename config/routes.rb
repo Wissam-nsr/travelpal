@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  root to: "pages#landing"
 
   get "uikit", to: "pages#uikit"
 
-  get "landing", to: "pages#landing"
+  get "home", to: "pages#home"
 
   get "map", to: "pages#map"
 
-  resources :users, only: [:show]
+  resources :users, only: [:show, :update]
 
   resources :trips, only: [:new, :create, :update, :destroy] do
     resources :steps, only: [:index, :new, :create]

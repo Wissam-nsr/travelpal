@@ -1,9 +1,9 @@
-<div class='container-stef'>
-<%= simple_form_for [@moment], url: new_moment_path do |f| %>
+<%= simple_form_for moment, url: new_moment_path do |f| %>
+  <div data-controller="components" class='container-stef'>
   <%= f.input :description, input_html: { style:'background: white' } %>
-  <%= f.input :location, input_html: { style:'background: white' } %>
+  <%= f.input :location, as: :boolean, name: "Take my current position", input_html: { data: { action: "change->components#momentform"} }%>
+  <%= f.input :location, input_html: { style:'background: white', data: { components_target: "location"} }  %>
   <%= f.input :photo, as: :file %>
-  <br>
   <%= f.button :submit, class: "btn btn-dark" %>
+  </div>
 <% end %>
-</div>

@@ -13,9 +13,14 @@ class MomentsController < ApplicationController
     @moment = Moment.new(moment_params)
     @moment.trip = @trip
     @moment.date = Date.today
-    results = Geocoder.search(@moment.location)
-    @moment.latitude = results.first.coordinates[0]
-    @moment.longitude = results.first.coordinates[1]
+    if @moment.location == "1"
+      @moment.latitude = request.location.latitude
+      @moment.longitude = request.location.longitude
+    else
+      results = Geocoder.search(@moment.location)
+      @moment.latitude = results.first.coordinates[0]
+      @moment.longitude = results.first.coordinates[1]
+    end
     if @moment.save
       redirect_to user_path(current_user)
     else

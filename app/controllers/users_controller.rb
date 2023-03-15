@@ -46,4 +46,18 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def update
+    @user = current_user
+    if request.remote_ip == "::1"
+      # Eiffel tower coordinates to test
+      @user.latitude = "48.8590453"
+      @user.longitude = "2.2933084"
+    else
+      @user.latitude = request.location.latitude
+      @user.longitude = request.location.longitude
+    end
+    @user.save
+    redirect_to home_path
+  end
 end
