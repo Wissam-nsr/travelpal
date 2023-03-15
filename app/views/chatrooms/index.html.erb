@@ -1,7 +1,7 @@
-<div class="container-chatrooms">
-  <h1>My chats</h1>
+<div class="chatrooms">
+  <h1 class="mb-2">My chats</h1>
   <% @my_chatrooms.each do |chatroom| %>
-  <div class= "user-description">
+  <div class= "single-chatroom">
   <div class = "user-banner">
     <%= link_to chatroom_path(chatroom) do %>
       <%= cl_image_tag chatroom.user_two == current_user ? chatroom.user_one.avatar.key : chatroom.user_two.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar-bordered" %>
