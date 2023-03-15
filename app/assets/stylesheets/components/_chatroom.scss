@@ -24,12 +24,19 @@
 }
 
 .container-chatroom {
+  height: calc(100vh - 135px);
+  padding-bottom: 40px;
+  overflow: scroll;
   margin-top: 2rem;
   padding: 3rem;
+  background: asset_url('squared-paper-texture.jpg');
+  background-size: contain;
 }
 
 .container-chatrooms {
   padding: 5rem;
+  background: asset_url('squared-paper-texture.jpg');
+  background-size: contain;
 }
 
 .chatroom-style {
@@ -58,8 +65,7 @@ align-items: center;
 }
 
 .message-form {
-position:sticky;
-bottom: 8rem;
+padding: 0rem 3rem;
 }
 
 .chatroom-banner {
