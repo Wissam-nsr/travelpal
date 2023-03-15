@@ -7,6 +7,7 @@
     "@popperjs/core": "^2.11.6",
     "@rails/actioncable": "^7.0.4-3",
     "bootstrap": "^5.2.3",
+    "localtunnel": "^2.0.2",
     "mapbox-gl-directions": "^3.0.3",
     "swiper": "^9.1.0",
     "util": "^0.12.5",
