@@ -1,7 +1,9 @@
 <div class="long-card">
   <div class="d-flex justify-content-between pb-2">
     <h5><%= user == current_user ? "My trips" : "#{user.username}'s trips"  %></h5>
-    <%= link_to raw("<p><i class='fa-solid fa-location-dot fs-3'></i>Add a step</p>"), new_trip_step_path(user.trips.last) if user == current_user %>
+    <% unless user.trips.empty? %>
+      <%= link_to raw("<p><i class='fa-solid fa-location-dot fs-3'></i>Add a step</p>"), new_trip_step_path(user.trips.last) if user == current_user %>
+    <% end %>
     </div>
   <div class = icone-list>
     <% if user == current_user  %>
