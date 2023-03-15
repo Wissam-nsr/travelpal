@@ -61,5 +61,3 @@ class UsersController < ApplicationController
     redirect_to home_path
   end
 end
-
-"48.8590453,2.2933084"
