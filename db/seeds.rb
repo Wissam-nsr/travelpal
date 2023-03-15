@@ -29,8 +29,11 @@ demo_user.password = "123456"
 demo_user.username = "Stephan_Supertramp"
 demo_user.description = "Traveling through Europe for a year. Looking fro new friends and adventures"
 demo_user.avatar.attach(io: URI.open("https://images.unsplash.com/photo-1547699326-3d895d9acd30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"), filename: "nes.png", content_type: "image/png")
+demo_user.latitude = "48.8590453"
+demo_user.longitude = "2.2933084"
 demo_user.save!
 
+USER_NAMES = ["Agathe", "Hugo_en", "Laura", "Matthew", "Roberto", "Nicolas", "Alexander", "Paul_from_sweden", "Nadia", "Sydney"]
 
 # 10 other users:
 BIOS = [
@@ -74,16 +77,18 @@ AVATARS_URL = [
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60"
 ]
 
+i = 0
 10.times do
   user = User.new
   user.email = Faker::Internet.email
   user.password = "123456"
-  user.username = Faker::Internet.username(specifier: 5...20)
+  user.username = USER_NAMES[i]
   user.description = BIOS.sample
   avatar = AVATARS_URL.sample
   user.avatar.attach(io: URI.open(avatar), filename: "nes.png", content_type: "image/png")
   AVATARS_URL.delete(avatar)
   user.save
+  i += 1
 end
 
 travelers = User.all.drop(1)
@@ -117,14 +122,14 @@ puts "Done ! (#{User.count} Users)"
 puts "Demo user: stephan@demo.com, pwd: 123456"
 
 # TRIPS
-puts "Creating 14 Trips"
+puts "Creating 13 Trips: 1 for each user  & 2 former trips for the demo user"
 puts "..."
 
 #Two previous trips for the demo user
 
 # First trip in Ireland
 trip = Trip.new
-trip.user = User.all.first
+trip.user = User.all.order(:id)[1]
 trip.name = "Ireland 2022"
 trip.description = "Campervan roadtrip through Ireland"
 trip.photo.attach(io: URI.open("https://images.unsplash.com/photo-1630784033384-a912e9b82090?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGlyZWxhbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60"), filename: "nes.png", content_type: "image/png")
@@ -160,7 +165,7 @@ end
 
 # Second trip in Iceland
 trip = Trip.new
-trip.user = User.all.first
+trip.user = User.all.order(:id)[1]
 trip.name = "Iceland 2021"
 trip.description = "South of Iceland during summer"
 trip.photo.attach(io: URI.open("https://images.unsplash.com/photo-1548191656-893904d26e3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGljZWxhbmQlMjBtYXB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"), filename: "nes.png", content_type: "image/png")
@@ -228,9 +233,9 @@ DESCRIPTIONS = [
   trip.save
 end
 
-trips = Trip.all.map { |trip| trip }
+trips = Trip.all.order(:id).map { |trip| trip }
 
-trips.drop(2)
+trips = trips.drop(2)
 i = 0
 
 trips.each do |trip|
@@ -242,7 +247,7 @@ end
 puts "Done ! (#{Trip.count} Trips)"
 
 # STEPS
-puts "Creating between 3 and 6 Steps per trips"
+puts "Creating between 2 and 5 Steps per trips"
 puts "..."
 
 STEPS = {
@@ -250,7 +255,7 @@ STEPS = {
     "Bucharest",
     "Budapest",
     "Vienna",
-    "Zagred",
+    "Zagreb",
     "Ljubljana",
     "Florence",
     "Milan",
@@ -264,7 +269,7 @@ STEPS = {
     "Barcelona",
     "Madrid",
     "Lisbon",
-    "London",
+    "London"
   ],
   "France discovery" => [
     "Marseille",
@@ -289,9 +294,9 @@ STEPS = {
     "Paris",
     "Bordeaux",
     "Barcelona",
-    "Valencia"
+    "Valencia",
     "Madrid",
-    "Seville"
+    "Seville",
     "Lisbon",
     "Porto"
   ],
@@ -299,7 +304,7 @@ STEPS = {
     "Bucharest",
     "Budapest",
     "Vienna",
-    "Zagred",
+    "Zagreb",
     "Ljubljana",
     "Rome",
     "Prague",
@@ -309,13 +314,14 @@ STEPS = {
     "Paris",
     "Barcelona",
     "Madrid",
-    "Lisbon",
+    "Lisbon"
   ]
   }
 
 trips.each do |trip|
   step_list = STEPS[trip.name].map { |step| step }
   trip_date = Faker::Date.between(from: 60.days.ago, to: Date.today)
+
   rand(2..5).times do
     step = Step.new
     step.trip = trip
@@ -332,23 +338,26 @@ end
 puts "Done ! (#{Step.count} Steps)"
 
 # MOMENTS
-puts "Creating between 2 and 5 Moments per Steps"
+puts "Creating between 1 and 3 Moments per Steps"
 puts "..."
 
-TRIPS = [
+QUERIES = [
   "europe-tourism",
   "france-tourism",
   "europe-tourism",
   "europe-capitals"
 ]
 
-step_list = STEPS.all.map { |step| step }
-step_list.each { |step| step.delete if step.trip == Trip.all[0] || step.trip == Trip.all[1] }
+step_list = Step.all.map { |step| step }
+step_list.reject!{|step| step.trip == Trip.all.order(:id)[0] || step.trip == Trip.all.order(:id)[1]}
+
 
 step_list.each_with_index do |step, index|
-  rand(2..3).times do
+
+  rand(1..3).times do
     moment = Moment.new
-    trip_index = TRIPS.index[step.trip.name]
+    trip_index = TRIPS.index(step.trip.name)
+    query = QUERIES[trip_index]
     moment.trip = step.trip
     moment.description = Faker::Lorem.sentence
     location = random_spot([step.latitude, step.longitude], 10)
@@ -358,7 +367,7 @@ step_list.each_with_index do |step, index|
     moment.date = Faker::Date.between(from: step.date - 2, to: step.date + 2)
     moment.save
   end
-  puts "#{index + 1} / #{Step.count} steps"
+  puts "#{index + 1} / #{step_list.count} steps"
   puts "..."
 end
 
