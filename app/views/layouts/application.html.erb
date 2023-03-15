@@ -19,6 +19,8 @@
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <%= render 'shared/ios_pwa_links' %>
+
+    <%= favicon_link_tag "favicon.png", rel: "icon", type: "image/png" %>
   </head>
 
   <body>
