@@ -14,12 +14,12 @@ Rails.application.routes.draw do
     resources :steps, only: [:index, :new, :create]
   end
 
-  resources :moments, only: [:new, :create]
+  resources :moments, only: [:new, :create, :destroy]
 
-  resources :chatrooms, only: [:show, :create, :destroy] do
+  resources :chatrooms, only: [:index, :show, :create, :destroy] do
     resources :messages, only: [:create]
   end
 
   resources :steps, only: [:edit, :update, :destroy]
-  resources :moments, only: [:destroy]
+  
 end
