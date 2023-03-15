@@ -1,8 +1,8 @@
- <div class="container chatroom"
+ <div class="container-chatroom"
     data-controller="chatroom-subscription"
     data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
     data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
-    <h1>Chat with <%= @other_user.username %></h1>
+    <h1><%= @other_user.username %></h1>
     <div class="messages" data-chatroom-subscription-target="messages">
       <% if @chatroom.messages.any? %>
           <div id="message-<%= @message.id %>">

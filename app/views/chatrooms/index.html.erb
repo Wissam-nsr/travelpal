@@ -1,9 +1,17 @@
-<div class="d-flex p-3">
-    <% @my_chatrooms.each do |chatroom| %>
-      <%= link_to chatroom_path(chatroom) do %>
-        <%= cl_image_tag chatroom.user_two == current_user ? chatroom.user_one.avatar.key : chatroom.user_two.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered m-2" %>
-        <%= chatroom.messages.last&.content %>
-      <% end %>
+<div class="container-chatrooms">
+  <h1>My chats</h1>
+  <% @my_chatrooms.each do |chatroom| %>
+  <div class= "user-description">
+  <div class = "user-banner">
+    <%= link_to chatroom_path(chatroom) do %>
+      <%= cl_image_tag chatroom.user_two == current_user ? chatroom.user_one.avatar.key : chatroom.user_two.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar-bordered" %>
     <% end %>
-  </ul>
+    <%= chatroom.user_two == current_user ? chatroom.user_one.username : chatroom.user_two.username %>
+  </div>
+    <div class="user-last-message">
+      <%= chatroom.messages.last&.content %>
+      <%= chatroom.messages.last&.created_at&.strftime("%a %b %e") %>
+    </div>
+  </div>
+  <% end %>
 </div>

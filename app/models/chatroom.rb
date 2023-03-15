@@ -4,5 +4,6 @@ class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   validates :user_one, uniqueness: { scope: :user_two_id }
+  validates :user_two, uniqueness: { scope: :user_one_id }
 
 end

@@ -14,9 +14,40 @@
 }
 
 .sender-style {
-  background-color: lightgreen;
+  background-color: #a6cbbe;
+  color: black
 }
 
 .receiver-style {
-  background-color: lightpink;
+  background-color: darkgrey;
+  color: black
+}
+
+.container-chatroom{
+  margin-top: 2rem;
+  padding: 3rem;
+}
+
+.container-chatrooms{
+  padding: 5rem;
+}
+
+.chatroom-style{
+  border-bottom: solid darkgray;
+}
+
+.user-description{
+  display: flex;
+  justify-content: space-between;
+  border-top: solid lightgray;
+  margin-top: 2rem;
+}
+
+.user-banner{
+  width: 12rem;
+}
+
+.user-last-message{
+  display: flex;
+
 }
