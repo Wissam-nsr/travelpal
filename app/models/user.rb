@@ -2,9 +2,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
 
-  geocoded_by :location
-  after_validation :geocode, if: :will_save_change_to_location?
-  after_validation :after_geocode
+  # geocoded_by :location
+  # after_validation :geocode, if: :will_save_change_to_location?
+  # after_validation :after_geocode
+
+  geocoded_by :address
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode if :will_save_change_to_address?
+  after_validation :reverse_geocode, :after_geocode
 
   has_one_attached :avatar
 
@@ -16,13 +21,13 @@ class User < ApplicationRecord
   validates :username, uniqueness: true, length: { minimum: 5, maximum: 20 }
 
   def after_geocode
-    if self.location
+    if self.address
       results = Geocoder.search([self.latitude, self.longitude])
       self.geocoder_object = results.first.data
     elsif self.latitude
       results = Geocoder.search([self.latitude, self.longitude])
       self.geocoder_object = results.first.data
-      self.location = results.first.data.dig('address', 'city_district')
+      self.address = results.first.data.dig('address', 'city_district')
     end
   end
 
