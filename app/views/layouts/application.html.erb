@@ -26,6 +26,8 @@
   <body>
     <%= render "shared/flashes" %>
     <%= yield %>
-    <%= render "components/navbar_bottom", user: current_user if user_signed_in? %>
+    <% unless devise_controller? %>
+      <%= render "components/navbar_bottom", user: current_user if user_signed_in? %>
+    <% end %>
   </body>
 </html>

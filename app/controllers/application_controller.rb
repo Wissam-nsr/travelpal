@@ -14,12 +14,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_moment
-  if current_user.trips.empty?
-    redirect_to user_path(user)
-  else
-    @trip = current_user.trips.last
-  end
+    @trip = current_user&.trips&.last
     @moment = Moment.new
-    @moment.trip = @trip if current_user
+    @moment&.trip = @trip if current_user
   end
 end
