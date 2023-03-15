@@ -23,31 +23,50 @@
   color: black
 }
 
-.container-chatroom{
+.container-chatroom {
   margin-top: 2rem;
   padding: 3rem;
 }
 
-.container-chatrooms{
+.container-chatrooms {
   padding: 5rem;
 }
 
-.chatroom-style{
+.chatroom-style {
   border-bottom: solid darkgray;
 }
 
-.user-description{
+.user-description {
   display: flex;
   justify-content: space-between;
   border-top: solid lightgray;
-  margin-top: 2rem;
+  padding: 1rem;
+  align-items: center;
 }
 
-.user-banner{
-  width: 12rem;
+.user-banner {
+  width: 30%;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
-.user-last-message{
+.user-last-message {
   display: flex;
-
+  width: 60%;
+  flex-direction: column;
 }
+
+.message-form {
+position:sticky;
+bottom: 8rem;
+}
+
+.chatroom-banner {
+  display: flex;
+  gap: 1rem;
+  align-items:flex-end;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: light lightgray
+  }

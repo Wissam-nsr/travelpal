@@ -9,7 +9,7 @@
     <%= chatroom.user_two == current_user ? chatroom.user_one.username : chatroom.user_two.username %>
   </div>
     <div class="user-last-message">
-      <%= chatroom.messages.last&.content %>
+      <%= chatroom.messages.last&.content %> -
       <%= chatroom.messages.last&.created_at&.strftime("%a %b %e") %>
     </div>
   </div>
