@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :steps, only: [:index, :new, :create]
   end
 
-  resources :chatrooms, only: [:index, :create, :destroy] do
+  resources :chatrooms, only: [:index, :show, :create, :destroy] do
     resources :messages, only: [:create]
   end
 

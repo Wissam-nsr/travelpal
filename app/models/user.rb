@@ -44,4 +44,8 @@ class User < ApplicationRecord
     Chatroom.find_by(user_one: [self, user], user_two: [self, user])
   end
 
+  def chatrooms
+    Chatroom.where(user_one:User.first).or(Chatroom.where(user_two:User.first))
+  end
+
 end

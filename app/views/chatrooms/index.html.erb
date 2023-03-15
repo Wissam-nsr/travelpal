@@ -1,42 +1,9 @@
 <div class="d-flex p-3">
     <% @my_chatrooms.each do |chatroom| %>
       <%= link_to chatroom_path(chatroom) do %>
-      <%= cl_image_tag chatroom.user_two.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered m-2" %>
+        <%= cl_image_tag chatroom.user_two == current_user ? chatroom.user_one.avatar.key : chatroom.user_two.avatar.key, height: 30, width: 30, alt: "avatar", class:"avatar avatar-bordered m-2" %>
+        <%= chatroom.messages.last&.content %>
       <% end %>
     <% end %>
   </ul>
 </div>
-
-<% if @chatroom.present? %>
-
-  <div class="container chatroom"
-    data-controller="chatroom-subscription"
-    data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
-    <h1>Chat with <%= @chatroom.user_two.username %></h1>
-    <div class="messages" data-chatroom-subscription-target="messages">
-      <% if @chatroom.messages.any? %>
-          <div id="message-<%= @message.id %>">
-        <% @chatroom.messages.each do |message| %>
-          <div class= "message-row d-flex <%= message.sender?(current_user) ? 'my-message justify-content-start' : 'other-message justify-content-end'%>">
-            <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-              <%= render "messages/message", message: message %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <% end %>
-    </div>
-  </div>
-
-  <%= simple_form_for [@chatroom, @message],
-    html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
-  %>
-    <%= f.input :content,
-      label: false,
-      placeholder: "Message",
-      wrapper_html: {class: "flex-grow-1"}
-    %>
-    <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-  <% end %>
-
-<% end %>

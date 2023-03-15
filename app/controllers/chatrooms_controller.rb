@@ -7,18 +7,14 @@ class ChatroomsController < ApplicationController
   end
 
   def index
-    @all_chatrooms = Chatroom.all
-    @my_chatrooms = []
-    @all_chatrooms.each do |chatroom|
-      if (chatroom.user_one == current_user || chatroom.user_two == current_user)
-        @my_chatrooms << chatroom
-      end
-    end
-      if params[:chatroom].present?
-      @chatroom = Chatroom.find(params[:id])
-    end
+    @my_chatrooms = current_user.chatrooms
+  end
+
+  def show
+    @chatroom = Chatroom.find(params[:id])
+    @user = current_user
+    @other_user =  @chatroom.user_two == current_user ? @chatroom.user_one : @chatroom.user_two
     @message = Message.new
-    raise
   end
 
   def destroy
