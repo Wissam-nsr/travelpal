@@ -5,7 +5,7 @@ class MomentsController < ApplicationController
   end
 
   def create
-    if current_user.trips.last.empty?
+    if current_user.trips.empty?
       redirect_to user_path(user)
     else
       @trip = current_user.trips.last
@@ -17,7 +17,7 @@ class MomentsController < ApplicationController
     @moment.latitude = results.first.coordinates[0]
     @moment.longitude = results.first.coordinates[1]
     if @moment.save
-      redirect_to user_path(user)
+      redirect_to user_path(current_user)
     else
       render :new, status: :unprocessable_entity
     end
