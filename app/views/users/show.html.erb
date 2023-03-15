@@ -24,7 +24,7 @@
     <div class="feed">
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="moment-tab-pane" role="tabpanel" aria-labelledby="moment-tab" tabindex="0">
-          <% if @trip.moments.empty? %>
+          <% if @trip.nil? || @trip.moments.empty?  %>
             <h5>No photo yet !</h5>
           <% else %>
             <%= render 'moment_list', moments: @trip.moments %>

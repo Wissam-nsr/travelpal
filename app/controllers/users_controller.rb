@@ -23,11 +23,13 @@ class UsersController < ApplicationController
       end
 
       @current_markers = []
-      @trip.steps.order(:date).each do |step|
-        @current_markers << {
-          lat: step.latitude,
-          lng: step.longitude,
-          }
+      unless @trips.empty?
+        @trip.steps.order(:date).each do |step|
+          @current_markers << {
+            lat: step.latitude,
+            lng: step.longitude,
+            }
+        end
       end
 
       @photos = []
