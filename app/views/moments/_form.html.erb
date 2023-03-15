@@ -1,4 +1,4 @@
-<%= simple_form_for [@trip, @moment], url: trip_moments_path do |f| %>
+<%= simple_form_for @moment, url: new_moment_path do |f| %>
   <div data-controller="components" class='container-stef'>
   <%= f.input :description, input_html: { style:'background: white' } %>
   <%= f.input :location, as: :boolean, name: "Take my current position", input_html: { data: { action: "change->components#momentform"} }%>
