@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
+    raise
     if request.remote_ip == "::1"
       # Eiffel tower coordinates to test
       @user.latitude = "48.8590453"
