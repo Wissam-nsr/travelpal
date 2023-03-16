@@ -25,16 +25,17 @@
 
 // To style the show
 
-.container-chatroom {
-  height: calc(100vh - 85px);
-  padding-bottom: 40px;
+
+
+.messages {
+  height: calc(86vh - 200px);
   overflow: scroll;
-  padding: 3rem;
+  padding: 3rem 1rem;
 }
 
 .container-chatroom-page {
   background: asset_url('squared-paper-texture.jpg');
-  background-size: contain;
+  height: 100vh;
 }
 
 
@@ -52,8 +53,7 @@
   display: flex;
   gap: 1rem;
   align-items:flex-end;
-  margin-bottom: 2rem;
-  padding: 1rem;
+  padding: 3rem;
   border-bottom: solid darkgray;
   background-color: white;
   }
@@ -68,7 +68,7 @@
     display: flex;
     width: 60%;
     flex-direction: column;
-    font-size: 13px;
+    font-size: 11px;
   }
 
   .single-chatroom {
