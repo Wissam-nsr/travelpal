@@ -29,13 +29,13 @@ demo_user = User.new
 demo_user.email = "stephan@demo.com"
 demo_user.password = "123456"
 demo_user.username = "Stephan_Supertramp"
-demo_user.description = "Traveling through Europe for a year. Looking fro new friends and adventures"
+demo_user.description = "Traveling through Europe for a year. Looking for new friends and adventures"
 demo_user.avatar.attach(io: URI.open("https://images.unsplash.com/photo-1547699326-3d895d9acd30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"), filename: "nes.png", content_type: "image/png")
 demo_user.latitude = "48.8590453"
 demo_user.longitude = "2.2933084"
 demo_user.save!
 
-USER_NAMES = ["Agathe", "Hugo_en", "Laura", "Matthew", "Roberto", "Nicolas", "Alexander", "Paul_from_sweden", "Nadia", "Sydney"]
+USER_NAMES = ["Agathe", "Hugooo", "Laura", "Jero_Barbe", "Paul.Port", "Theo.Ban", "Suny.Cults", "Lahana_Ohana", "Nadia", "Mathieu_Coso"]
 
 # 10 other users:
 BIOS = [

@@ -1,0 +1,5 @@
+meta_product_name: "TravelPal"
+meta_title: "TravelPal - Connecting travelers all over the globe"
+meta_description: "TravelPal is a site that allows one to find travelers around their location and see their trip highlights, all while having the possibility to interact with said travelers"
+meta_image: "landing_page_screen.png" # should exist in `app/assets/images/`
+twitter_account: "@your_twitter_account"   # required for Twitter Cards
