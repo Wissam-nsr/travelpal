@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     ip = request.remote_ip
-    if ip == "::1"
+    if request.remote_ip == "::1"
       latitude = "48.8584"
       longitude = "2.2945"
     else

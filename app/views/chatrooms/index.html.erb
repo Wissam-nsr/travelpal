@@ -1,5 +1,5 @@
 <div class="chatrooms">
-  <h1 class="mb-2">My chats</h1>
+  <h1 class="mb-3">My chats</h1>
   <% @my_chatrooms.each do |chatroom| %>
   <div class= "single-chatroom">
   <div class = "user-banner">
@@ -10,7 +10,7 @@
   </div>
     <div class="user-last-message">
       <%= chatroom.messages.last&.content %> -
-      <%= chatroom.messages.last&.created_at&.strftime("%a %b %e") %>
+      <strong><%= chatroom.messages.last&.created_at&.strftime("%a %b %e") %></strong>
     </div>
   </div>
   <% end %>
