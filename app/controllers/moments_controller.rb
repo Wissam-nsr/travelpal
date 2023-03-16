@@ -14,8 +14,8 @@ class MomentsController < ApplicationController
     @moment.trip = @trip
     @moment.date = Date.today
     if @moment.location == "1"
-      @moment.latitude = request.location.latitude
-      @moment.longitude = request.location.longitude
+      @moment.latitude = Geocoder.search(request.remote_ip).first.latitude
+      @moment.longitude = Geocoder.search(request.remote_ip).first.longitude
     else
       results = Geocoder.search(@moment.location)
       @moment.latitude = results.first.coordinates[0]
