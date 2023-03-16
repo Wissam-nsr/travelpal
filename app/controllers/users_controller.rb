@@ -3,11 +3,11 @@ class UsersController < ApplicationController
     unless user_signed_in?
       redirect_to landing_path
     else
-      @user = User.find(params[:id])
+      @user = User.includes(:trips).find(params[:id])
       @trips = @user.trips
       @params = params[:trip]
       if params[:trip].present?
-        @trip = Trip.find(@params)
+        @trip = Trip.includes(:moments, :steps).find(@params)
       else
         @trip = @user.trips.last
       end
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
       latitude = Geocoder.search(ip).first.latitude
       longitude = Geocoder.search(ip).first.longitude
     end
-    @user.update!( latitude: latitude, longitude: longitude)
+    @user.update!(latitude: latitude, longitude: longitude)
     redirect_to home_path
   end
 end
