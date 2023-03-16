@@ -4,14 +4,8 @@
   <% end %>
   <p> <strong><%= users.length - 1 %> travelpals</strong> around you </p>
     <div class="dropdown feed-top-dropdown">
-      <form method="get" action="/">
-        <select name="radius" onChange="this.form.submit()">
-          <option value="50">50 km radius</option>
-          <option value="0">0 km radius</option>
-          <option value="5">5 km radius</option>
-          <option value="10">10 km radius</option>
-          <option value="25">25 km radius</option>
-        </select>
-      </form>
+      <%= form_with url: "/home", method: :get, data: {controller: "dropdown-radius", dropdown_radius_params_value: params[:radius] } do |form| %>
+        <%= form.select :radius, [0, 5, 10, 25, 50], { prompt: "select"}, autocomplete: "off", data: { dropdown_radius_target: "radius", action: "change->dropdown-radius#fireForm"} %>
+      <% end %>
     </div>
 </div>
