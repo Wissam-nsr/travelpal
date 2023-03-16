@@ -5,7 +5,7 @@
     <%= f.input :location, as: :boolean, label: "Take my current position", input_html: { data: { action: "change->components#momentform"} }%>
     <p>or</p>
     <%= f.input :location, label: "Enter address manualy", input_html: { style:'background: white', data: { components_target: "location"} }  %>
-    <%= f.input :photo, as: :file, accept:"image/*capture=camera" %>
+    <%= f.input :photo, as: :file, accept:"image/*", capture:"environment" %>
     <%= f.button :submit, class: "btn btn-dark" %>
   <% end %>
 </div>
