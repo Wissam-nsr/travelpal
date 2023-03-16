@@ -40,6 +40,8 @@ export default class extends Controller {
 
     // Inserting the `message` in the DOM
     this.messagesTarget.insertAdjacentHTML("beforeend", messageElement)
+    console.log(this.messagesTarget.scrollHeight)
+    console.log(this.messagesTarget.scrollTop)
     this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)
   }
 
