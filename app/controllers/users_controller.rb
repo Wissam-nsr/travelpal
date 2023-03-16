@@ -59,6 +59,5 @@ class UsersController < ApplicationController
     end
     @user.save
     redirect_to home_path
-    flash[:message] = puts "data-ip: #{request.location.data["ip"]}, remote_ip: #{request.remote_ip}"
   end
 end
