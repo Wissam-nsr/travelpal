@@ -5,8 +5,9 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
       @trips = @user.trips
+      @params = params[:trip]
       if params[:trip].present?
-        @trip = Trip.find(params[:trip])
+        @trip = Trip.find(@params)
       else
         @trip = @user.trips.last
       end
@@ -16,8 +17,8 @@ class UsersController < ApplicationController
         trip.steps.order(:date).each do |step|
           steps_list << {
             lat: step.latitude,
-            lng: step.longitude,
-            }
+            lng: step.longitude
+          }
         end
         @markers << steps_list
       end
@@ -27,8 +28,8 @@ class UsersController < ApplicationController
         @trip.steps.order(:date).each do |step|
           @current_markers << {
             lat: step.latitude,
-            lng: step.longitude,
-            }
+            lng: step.longitude
+          }
         end
       end
 
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
             lat: moment.latitude,
             lng: moment.longitude,
             photo_html: render_to_string(partial: "moments/photo", locals: { moment: moment })
-            }
+          }
         end
         @photos << steps_list
       end
