@@ -34,7 +34,7 @@ export default class extends Controller {
         new mapboxgl.Marker({
           color: "#000"})
           .setLngLat([ marker.lng, marker.lat ])
-          .setPopup(popup)
+          // .setPopup(popup)
           .addTo(this.map)
       })
     })

@@ -4,18 +4,6 @@
     <%= render 'trip_list', trips: @trips, user: @user, params: @params %>
   </div>
 
-<% unless @user == current_user %>
-
-  <% if current_user.chatroom_with(@user)%>
-    <%= link_to "Chat", chatroom_path(current_user.chatroom_with(@user))  %>
-  <% else %>
-    <%= link_to chatrooms_path(user_two: @user), data: { turbo_method: :post } do %>
-      <span>Chat</span>
-    <% end %>
-  <% end %>
-
-<% end %>
-
   <div class="show-user-bottom" style="height: 55%; width: 100%;">
     <div class="nav tab-links" id="myTab" role="tablist">
       <div class="show-tab" role="presentation">
