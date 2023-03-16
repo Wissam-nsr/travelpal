@@ -5,7 +5,7 @@
   <p> <strong><%= users.length - 1 %> travelpals</strong> around you </p>
     <div class="dropdown feed-top-dropdown">
       <%= form_with url: "/home", method: :get, data: {controller: "dropdown-radius", dropdown_radius_params_value: params[:radius] } do |form| %>
-        <%= form.select :radius, [["5 km",5],["10 km",10],["25 km",25],["50 km",50],["100 km",100]], { prompt: "select radius"}, autocomplete: "off", data: { dropdown_radius_target: "radius", action: "change->dropdown-radius#fireForm"} %>
+        <%= form.select :radius, [["5 km",5],["10 km",10],["25 km",25],["50 km",50],["100 km",100]], { prompt: "radius"}, autocomplete: "off", data: { dropdown_radius_target: "radius", action: "change->dropdown-radius#fireForm"}, style:"width: 7rem" %>
       <% end %>
     </div>
 </div>

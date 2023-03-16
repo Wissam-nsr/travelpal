@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between pb-2">
     <h5><%= user == current_user ? "My trips" : "#{user.username}'s trips"  %></h5>
     <% unless user.trips.empty? %>
-      <%= link_to new_trip_step_path(user.trips.last), class feed ="fa-solid fa-location-dot"  if user == current_user %>
+      <%= link_to raw("<button class='btn btn-dark rounded-pill'><i class='fa-solid fa-location-dot fs-3'></i>Add a step</button>"), new_trip_step_path(user.trips.last) if user == current_user %>
     <% end %>
     </div>
   <div class = icone-list>
