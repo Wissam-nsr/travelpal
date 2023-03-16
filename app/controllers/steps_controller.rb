@@ -2,25 +2,32 @@ require "json"
 require "open-uri"
 
 class StepsController < ApplicationController
-before_action :set_step, only: [:edit, :update, :destroy]
-
+  before_action :set_step, only: [:edit, :update, :destroy]
 
   def index
-    @trip = Trip.find(params[:trip_id])
+    @trip = Trip.includes(:steps).find(params[:trip_id])
     @steps = @trip.steps
   end
 
   def new
-      @step = Step.new
+    @step = Step.new
   end
 
   def create
-    if @trip = current_user.trips.last.present?
+    if current_user.trips.last.present?
       @trip = current_user.trips.last
     else
       redirect_to user_path(current_user)
     end
     @step = Step.new(step_params)
+    if @step.location == "1"
+      @step.latitude = Geocoder.search(request.remote_ip).first.latitude
+      @step.longitude = Geocoder.search(request.remote_ip).first.longitude
+    else
+      results = Geocoder.search(@step.location)
+      @step.latitude = results.first.coordinates[0]
+      @step.longitude = results.first.coordinates[1]
+    end
     @step.trip = @trip
     @step.date = Date.today
     if @step.save
@@ -60,7 +67,7 @@ before_action :set_step, only: [:edit, :update, :destroy]
     trip = step.trip
     steps = trip.steps.order(:date)
     index = steps.index(step)
-    if index == 0
+    if index.zero?
       step.route = "#{step.latitude}, #{step.longitude}"
     else
       start_point = steps[index - 1]
@@ -69,7 +76,7 @@ before_action :set_step, only: [:edit, :update, :destroy]
       url = `https://api.mapbox.com/directions/v5/mapbox/driving/#{start[1]},#{start[0]};#{finish[1]},#{finish[0]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
       json = JSON.parse(URI.open(url))
       data = json.routes[0]
-      route =  data.geometry.coordinates
+      route = data.geometry.coordinates
       step.route = route
     end
   end
