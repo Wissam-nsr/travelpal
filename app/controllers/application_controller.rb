@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     @moment = Moment.new
     @moment&.trip = @trip if current_user
   end
+
+  def default_url_options
+    { host: ENV["www.travelpal.site"] || "localhost:3000" }
+  end
 end
