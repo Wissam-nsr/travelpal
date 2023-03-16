@@ -1,7 +1,7 @@
 <div class="long-card">
   <div class="pb-2">
     <% unless user.trips.empty? %>
-      <%= link_to raw("<h5><i class='fa-solid fa-location-dot fs-3'></i>Add a step</h5>"), new_trip_step_path(user.trips.last) if user == current_user %>
+      <%= link_to raw("<button class='btn btn-dark rounded-pill'><i class='fa-solid fa-location-dot fs-3'></i>Add a step</button>"), new_trip_step_path(user.trips.last) if user == current_user %>
     <% end %>
     </div>
   <div class = icone-list>
@@ -28,6 +28,6 @@
           <p><%= trip.name %></p>
         <% end %>
       <% end %>
-    <% end %>
+    <% end %>feed
   </div>
 </div>
