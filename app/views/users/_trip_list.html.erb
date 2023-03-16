@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between pb-2">
     <h5><%= user == current_user ? "My trips" : "#{user.username}'s trips"  %></h5>
     <% unless user.trips.empty? %>
-      <%= link_to raw("<p><i class='fa-solid fa-location-dot fs-3'></i>Add a step</p>"), new_trip_step_path(user.trips.last) if user == current_user %>
+      <%= link_to new_trip_step_path(user.trips.last), class feed ="fa-solid fa-location-dot"  if user == current_user %>
     <% end %>
     </div>
   <div class = icone-list>
@@ -17,6 +17,6 @@
           <%= cl_image_tag trip.photo.key, transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], alt: "Photo for the trip '#{trip.name}'", class:"icone-pic" %>
         <% end %>
       <% end %>
-    <% end %>
+    <% end %>feed
   </div>
 </div>
