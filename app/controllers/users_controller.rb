@@ -49,7 +49,6 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    flash.alert = puts "data-ip: #{request.location.data["ip"]}, remote_ip: #{request.remote_ip}"
     if request.remote_ip == "::1"
       # Eiffel tower coordinates to test
       @user.latitude = "48.8590453"
@@ -60,5 +59,6 @@ class UsersController < ApplicationController
     end
     @user.save
     redirect_to home_path
+    flash[:message] = puts "data-ip: #{request.location.data["ip"]}, remote_ip: #{request.remote_ip}"
   end
 end
