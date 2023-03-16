@@ -49,73 +49,15 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    latitude = Geocoder.search(request.remote_ip).first.latitude
-    longitude = Geocoder.search(request.remote_ip).first.longitude
+    ip = request.remote_ip
+    if ip == "::1"
+      latitude = "48.8584"
+      longitude = "2.2945"
+    else
+      latitude = Geocoder.search(ip).first.latitude
+      longitude = Geocoder.search(ip).first.longitude
+    end
     @user.update!( latitude: latitude, longitude: longitude)
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p latitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p longitude
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
-    p @user
     redirect_to home_path
   end
 end
