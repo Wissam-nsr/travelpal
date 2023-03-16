@@ -8,8 +8,9 @@ class User < ApplicationRecord
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
-  after_validation :geocode if :will_save_change_to_address?
-  after_validation :reverse_geocode, :after_geocode
+  after_validation :after_geocode
+  # after_validation :geocode if :will_save_change_to_address?
+  # after_validation :reverse_geocode, :after_geocode
 
   has_one_attached :avatar
 
