@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   end
 
   def landing
-    flash.now[:notice] = "data-ip: #{request.location.data["ip"]}, remote_ip: #{request.remote_ip}"
+    flash.now[:notice] = "remote_ip: #{request.location.data["ip"]}, lat: #{request.location.latitude}, long: #{request.location.longitude}"
   end
 
   def map
