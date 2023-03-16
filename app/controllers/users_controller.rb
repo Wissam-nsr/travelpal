@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    raise
+    flash.alert = puts "data-ip: #{request.location.data["ip"]}, remote_ip: #{request.remote_ip}"
     if request.remote_ip == "::1"
       # Eiffel tower coordinates to test
       @user.latitude = "48.8590453"
