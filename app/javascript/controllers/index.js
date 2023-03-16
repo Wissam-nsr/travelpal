@@ -10,6 +10,9 @@ application.register("chatroom-subscription", ChatroomSubscriptionController)
 import ComponentsController from "./components_controller"
 application.register("components", ComponentsController)
 
+import DropdownRadiusController from "./dropdown_radius_controller"
+application.register("dropdown-radius", DropdownRadiusController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

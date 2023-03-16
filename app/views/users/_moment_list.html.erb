@@ -1,6 +1,6 @@
 <div class="center-column">
   <h5 class="text-center"><strong><%= moments.first.trip.name %></strong></h5>
-  <% moments.each do |moment| %>
+  <% moments.order(:id).reverse_order.each do |moment| %>
       <% location = Geocoder.search([moment.latitude,moment.longitude]).first.address  %>
       <% location = location.split(',')[0] %>
       <h5><%= location unless location.nil? %></h5>

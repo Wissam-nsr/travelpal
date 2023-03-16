@@ -1,6 +1,5 @@
 <div class="long-card">
-  <div class="d-flex justify-content-between pb-2">
-    <h5><%= user == current_user ? "My trips" : "#{user.username}'s trips"  %></h5>
+  <div class="pb-2">
     <% unless user.trips.empty? %>
       <%= link_to raw("<button class='btn btn-dark rounded-pill'><i class='fa-solid fa-location-dot fs-3'></i>Add a step</button>"), new_trip_step_path(user.trips.last) if user == current_user %>
     <% end %>
@@ -14,9 +13,21 @@
     <% unless trips.empty? %>
       <% trips.each do |trip| %>
         <%= link_to user_path(trip: trip) do %>
-          <%= cl_image_tag trip.photo.key, transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], alt: "Photo for the trip '#{trip.name}'", class:"icone-pic" %>
+          <% if (params.nil? && trip == trips.first) || trip.id.to_s == params %>
+            <%= cl_image_tag trip.photo.key,
+              transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ],
+              alt: "Photo for the trip '#{trip.name}'",
+              class:"icone-pic",
+              style:'box-shadow: 0 0 5px 5px #94BCAE' %>
+          <% else %>
+            <%= cl_image_tag trip.photo.key,
+              transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ],
+              alt: "Photo for the trip '#{trip.name}'",
+              class:"icone-pic" %>
+          <% end %>
+          <p><%= trip.name %></p>
         <% end %>
       <% end %>
-    <% end %>
+    <% end %>feed
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="screen">
   <div class="show-user-top" style="height: calc(45% - 52px); width: 100%;">
     <%= render 'shared/profile', user: @user %>
-    <%= render 'trip_list', trips: @trips, user: @user %>
+    <%= render 'trip_list', trips: @trips, user: @user, params: @params %>
   </div>
 
 <% unless @user == current_user %>
@@ -14,7 +14,7 @@
     <% end %>
   <% end %>
 
-  <% end %>
+<% end %>
 
   <div class="show-user-bottom" style="height: 55%; width: 100%;">
     <div class="nav tab-links" id="myTab" role="tablist">
@@ -29,7 +29,9 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="moment-tab-pane" role="tabpanel" aria-labelledby="moment-tab" tabindex="0">
           <% if @trip.nil? || @trip.moments.empty?  %>
-            <h5>No photo yet !</h5>
+            <div class="d-flex justify-content-center align-items-center pt-5 bg-white">
+              <h5><strong>No photo yet ! 🙃</strong></h5>
+            </div>
           <% else %>
             <%= render 'moment_list', moments: @trip.moments %>
           <% end %>

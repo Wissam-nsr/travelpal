@@ -6,7 +6,6 @@ import Swiper, { Navigation } from 'swiper';
 // Connects to data-controller="swiper"
 export default class extends Controller {
   connect() {
-    console.log(this.element)
     const swiper = new Swiper(this.element, {
       // Optional parameters
         loop: true,
