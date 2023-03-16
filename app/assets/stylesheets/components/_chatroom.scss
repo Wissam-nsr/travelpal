@@ -23,49 +23,29 @@
   color: black
 }
 
+// To style the show
+
 .container-chatroom {
-  height: calc(100vh - 135px);
+  height: calc(100vh - 85px);
   padding-bottom: 40px;
   overflow: scroll;
-  margin-top: 2rem;
   padding: 3rem;
+}
+
+.container-chatroom-page {
   background: asset_url('squared-paper-texture.jpg');
   background-size: contain;
 }
 
-.container-chatrooms {
-  padding: 5rem;
-  background: asset_url('squared-paper-texture.jpg');
-  background-size: contain;
-}
 
 .chatroom-style {
   border-bottom: solid darkgray;
 }
 
-.user-description {
-  display: flex;
-  justify-content: space-between;
-  border-top: solid lightgray;
-  padding: 1rem;
-  align-items: center;
-}
-
-.user-banner {
-  width: 30%;
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-
-.user-last-message {
-  display: flex;
-  width: 60%;
-  flex-direction: column;
-}
-
 .message-form {
-padding: 0rem 3rem;
+  padding: 0rem 5rem;
+  position: sticky;
+  bottom: 77px;
 }
 
 .chatroom-banner {
@@ -73,6 +53,36 @@ padding: 0rem 3rem;
   gap: 1rem;
   align-items:flex-end;
   margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
-  border-bottom: light lightgray
+  padding: 1rem;
+  border-bottom: solid darkgray;
+  background-color: white;
+  }
+
+  // To style the index
+
+  .chatrooms {
+    padding: 3rem;
+  }
+
+  .user-last-message {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    font-size: 13px;
+  }
+
+  .single-chatroom {
+    display: flex;
+    justify-content: space-between;
+    border-top: solid lightgray;
+    padding: 1rem;
+    align-items: center;
+    background-color: white;
+  }
+
+  .user-banner {
+    width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   }
