@@ -9,7 +9,7 @@
   <% if current_user.chatroom_with(@user)%>
     <%= link_to "Chat", chatroom_path(current_user.chatroom_with(@user))  %>
   <% else %>
-    <%= link_to chatroom_path(user_two: @user), data: { turbo_method: :post } do %>
+    <%= link_to chatrooms_path(user_two: @user), data: { turbo_method: :post } do %>
       <span>Chat</span>
     <% end %>
   <% end %>
