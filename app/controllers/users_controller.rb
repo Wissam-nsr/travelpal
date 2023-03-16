@@ -4,7 +4,7 @@ class UsersController < ApplicationController
       redirect_to landing_path
     else
       @user = User.includes(:trips).find(params[:id])
-      @trips = @user.trips
+      @trips = @user.trips.order(:id).reverse_order
       @params = params[:trip]
       if params[:trip].present?
         @trip = Trip.includes(:moments, :steps).find(@params)

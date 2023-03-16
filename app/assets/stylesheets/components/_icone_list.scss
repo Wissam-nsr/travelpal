@@ -1,8 +1,8 @@
 .icone-list {
   // width: 80%;
   display: flex;
-  gap: 1rem;
-  align-items: center;
+  gap: 2rem;
+  align-items: start;
   overflow: scroll;
   padding-top: 1rem;
 
@@ -19,6 +19,8 @@
   p {
     margin-bottom: 0;
     padding-top: 1rem;
+    width: 6rem;
+    text-align: center;
   }
 
   a {

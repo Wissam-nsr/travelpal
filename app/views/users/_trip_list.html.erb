@@ -13,7 +13,7 @@
     <% unless trips.empty? %>
       <% trips.each do |trip| %>
         <%= link_to user_path(trip: trip) do %>
-          <% if (params.nil? && trip == trips.last) || trip.id.to_s == params %>
+          <% if (params.nil? && trip == trips.first) || trip.id.to_s == params %>
             <%= cl_image_tag trip.photo.key,
               transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ],
               alt: "Photo for the trip '#{trip.name}'",

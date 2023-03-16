@@ -14,12 +14,20 @@ class StepsController < ApplicationController
   end
 
   def create
-    if @trip == current_user.trips.last.present?
+    if current_user.trips.last.present?
       @trip = current_user.trips.last
     else
       redirect_to user_path(current_user)
     end
     @step = Step.new(step_params)
+    if @step.location == "1"
+      @step.latitude = Geocoder.search(request.remote_ip).first.latitude
+      @step.longitude = Geocoder.search(request.remote_ip).first.longitude
+    else
+      results = Geocoder.search(@step.location)
+      @step.latitude = results.first.coordinates[0]
+      @step.longitude = results.first.coordinates[1]
+    end
     @step.trip = @trip
     @step.date = Date.today
     if @step.save
