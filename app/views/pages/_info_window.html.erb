@@ -1,3 +1,7 @@
-
-<h2><%= link_to user.username, user_path(user) %></h2>
-<p><%= user.address %></p>
+<div class="d-flex jsutify-content-between p-2">
+  <%= cl_image_tag user.avatar.key, transformation: [ width: 100, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "user-image"%>
+  <div class="ps-1">
+    <h5><%= link_to user.username, user_path(user), class: "btn btn-info" %></h5>
+    <p><%= user.description %></p>
+  </div>
+</div>

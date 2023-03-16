@@ -35,6 +35,10 @@
 }
 
 .profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 4rem;
   width: 100%;
   height: fit-content;
   padding-left: 2rem;

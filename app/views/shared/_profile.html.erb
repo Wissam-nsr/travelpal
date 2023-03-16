@@ -2,8 +2,16 @@
   <div class = "flex-left">
     <%= cl_image_tag user.avatar.key, transformation: [ width: 60, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "user-image"%>
     <h5><strong><%= user.username %></strong></h5>
-    <%= link_to raw("<i class='fa-solid fa-right-from-bracket text-secondary text-end fs-3'></i>"), destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } if user == current_user %>
   </div>
+    <% if user == current_user  %>
+      <%= link_to raw("<i class='fa-solid fa-right-from-bracket text-secondary text-end fs-3'></i>"), destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <% else %>
+      <% if current_user.chatroom_with(@user)%>
+        <%= link_to raw("<p class='btn btn-info rounded-pill fs-6 text-white'><i class='fa-solid fa-comments text-white pe-1'></i></i>Chat</p>"), chatroom_path(current_user.chatroom_with(@user))  %>
+      <% else %>
+        <%= link_to raw("<p class='btn btn-info rounded-pill fs-6 text-white'><i class='fa-solid fa-comments text-white pe-1'></i></i>Chat</p>"), chatrooms_path(user_two: @user), data: { turbo_method: :post } %>
+      <% end %>
+    <% end %>
 </div>
   <div class="long-card">
     <div class="txt"><p><%= user.description %></p></div>
