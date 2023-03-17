@@ -30,8 +30,9 @@ export default class extends Controller {
   #addMarkersToMap() {
     this.markersValue.forEach((trip) => {
       trip.forEach((marker) => {
-        // const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-        new mapboxgl.Marker()
+        const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+        new mapboxgl.Marker({
+          color: "#000"})
           .setLngLat([ marker.lng, marker.lat ])
           // .setPopup(popup)
           .addTo(this.map)
@@ -120,9 +121,8 @@ export default class extends Controller {
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#3887be',
-          'line-width': 5,
-          'line-opacity': 0.75
+          'line-color': '#000',
+          'line-width': 3,
         }
         });
       }
