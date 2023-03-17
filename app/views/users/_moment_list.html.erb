@@ -1,9 +1,7 @@
 <div class="center-column">
   <h5 class="text-center"><strong><%= moments.first.trip.name %></strong></h5>
   <% moments.order(:id).reverse_order.each do |moment| %>
-      <% location = Geocoder.search([moment.latitude,moment.longitude]).first.address  %>
-      <% location = location.split(',')[0] %>
-      <h5><%= location unless location.nil? %></h5>
+      <h5><%= moment.nearest_city %></h5>
     <div class="photo-stack">
       <%= cl_image_tag moment.photo.key, transformation: [ width: :auto, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "photo" %>
       <%= cl_image_tag moment.photo.key, transformation: [ width: :auto, crop: "scale", dpr: "auto", responsive: "true", responsive_placeholder: "blank" , fetch_format: :auto ], class: "bg" %>
