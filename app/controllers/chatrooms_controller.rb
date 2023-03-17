@@ -3,7 +3,7 @@ class ChatroomsController < ApplicationController
   def create
     @chatroom = Chatroom.new(user_one: current_user, user_two:User.find(params[:user_two]))
     @chatroom.save
-    redirect_to chatroom_messages_path(chatroom_id: @chatroom)
+    redirect_to chatroom_path(@chatroom)
   end
 
   def index
