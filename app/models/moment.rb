@@ -22,7 +22,7 @@ class Moment < ApplicationRecord
     elsif self.geocoder_object["address"]["city_district"].present?
       self.geocoder_object["address"]["city_district"]
     else
-      ""
+      self.description
     end
   end
 
